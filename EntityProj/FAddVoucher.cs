@@ -38,7 +38,7 @@ namespace EntityProj.Forms
                 {
                     var voucher = new Voucher 
                     { 
-                        SellerID = account.Id,
+                        SellerID = account.ID,
                         Name = txtVoucherName.Text,
                         Value = (Decimal)StringToDouble(txtVoucherValue.Text),
                         BeginDay = dtBeginday.Value,

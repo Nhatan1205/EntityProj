@@ -170,6 +170,7 @@
       <DependentUpon>ProjectModel.tt</DependentUpon>
     </Compile>
     <Compile Include="AccountDAO.cs" />
+    <Compile Include="AccountExtension.cs" />
     <Compile Include="CancelInfoDAO.cs" />
     <Compile Include="Cancel_Info.cs">
       <DependentUpon>ProjectModel.tt</DependentUpon>
@@ -314,6 +315,7 @@
       <DependentUpon>ProjectModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ProductDAO.cs" />
+    <Compile Include="ProductExtension.cs" />
     <Compile Include="ProductImage.cs">
       <DependentUpon>ProjectModel.tt</DependentUpon>
     </Compile>
@@ -337,6 +339,7 @@
     <Compile Include="Rating.cs">
       <DependentUpon>ProjectModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="RatingDAO.cs" />
     <Compile Include="Recommend.cs">
       <DependentUpon>ProjectModel.tt</DependentUpon>
     </Compile>

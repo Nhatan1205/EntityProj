@@ -38,7 +38,7 @@ namespace EntityProj.Forms
 
         private void FCart_Load(object sender, EventArgs e)
         {
-            products = cartDAO.loadListWithAccountID(account.Id);
+            products = cartDAO.loadListWithAccountID(account.ID);
             foreach (var pd in products)
             {
                 if (pd.BuyerID == 0)
@@ -49,12 +49,13 @@ namespace EntityProj.Forms
                     flpCartList.Controls.Add(uc);
                 } else
                 {
-                    cartDAO.delete(account.Id, pd.Id);
+                    cartDAO.delete(account.ID, pd.ID);
                 }
             }
             //menu
             lblMenuAccountName.Text = account.Name;
-            ratingMenuAccount.Value = account.AvgRating;
+            AccountExtension accE = new AccountExtension(account.ID);
+            ratingMenuAccount.Value = accE.AvgRating;
             convertByte(pbMenuAvatar, account.Avatar);
         }
         private void convertByte(PictureBox pic, byte[] imageData)

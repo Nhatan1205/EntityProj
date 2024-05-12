@@ -17,5 +17,6 @@ namespace EntityProj
         public int BuyerID { get; set; }
         public int ViewCount { get; set; }
         public string Type { get; set; }
+        public int ID { get; set; }
     }
 }

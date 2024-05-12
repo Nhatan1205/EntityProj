@@ -17,11 +17,11 @@ namespace EntityProj.Forms
 {
     public partial class FRating : Form
     {
-        //private ImageDAO imageDAO = new ImageDAO();
+        private ImageDAO imageDAO = new ImageDAO();
         private Product product;
         private ProductDAO productDAO = new ProductDAO();
         private Rating rt = new Rating();
-        //private RatingDAO ratingDAO = new RatingDAO();
+        private RatingDAO ratingDAO = new RatingDAO();
         public FRating()
         {
             InitializeComponent();
@@ -34,21 +34,21 @@ namespace EntityProj.Forms
             this.product = pd;
             lblNameProduct.Text = product.Name;
 
-            //byte[] imageData = imageDAO.GetImageProductData(pd.Id);
-            //if (imageData != null && imageData.Length > 0)
-            //{
-            //    using (MemoryStream ms = new MemoryStream(imageData))
-            //    {
-            //        try
-            //        {
-            //            pbProduct.Image = Image.FromStream(ms);
-            //        }
-            //        catch (ArgumentException ex)
-            //        {
-            //            Console.WriteLine("Failed to create Image object: " + ex.Message);
-            //        }
-            //    }
-            //}
+            byte[] imageData = imageDAO.GetImageProductData(pd.ID);
+            if (imageData != null && imageData.Length > 0)
+            {
+                using (MemoryStream ms = new MemoryStream(imageData))
+                {
+                    try
+                    {
+                        pbProduct.Image = Image.FromStream(ms);
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        Console.WriteLine("Failed to create Image object: " + ex.Message);
+                    }
+                }
+            }
         }
         private void btnClose_Click(object sender, EventArgs e)
         {

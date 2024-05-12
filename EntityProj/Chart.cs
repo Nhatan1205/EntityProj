@@ -12,6 +12,7 @@ namespace EntityProj
 {
     internal class Chart
     {
+        /*
         private ImageDAO imageDAO = new ImageDAO();
         private Account account = new Account();
         private AccountDAO accountDAO = new AccountDAO();
@@ -214,5 +215,6 @@ namespace EntityProj
             }
             return list;
         }
+        */
     }
 }

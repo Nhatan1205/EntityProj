@@ -23,5 +23,38 @@ namespace EntityProj
                 return topThreeTypes;
             }
         }
+
+        public void Update(string type, int buyerID)
+        {
+            using (var dbContext = new Window_ProjectContext())
+            {
+                // Check if a recommendation already exists for the given buyerID and type
+                var existingRecommendation = dbContext.Recommends
+                                                      .FirstOrDefault(r => r.BuyerID == buyerID && r.Type == type);
+
+                if (existingRecommendation != null)
+                {
+                    // If the recommendation exists, update the ViewCount
+                    existingRecommendation.ViewCount++;
+                }
+                else
+                {
+                    // If the recommendation doesn't exist, create a new recommendation
+                    var newRecommendation = new Recommend
+                    {
+                        BuyerID = buyerID,
+                        Type = type,
+                        ViewCount = 1 // Start with ViewCount = 1 for new recommendations
+                    };
+
+                    // Add the new recommendation to the DbSet
+                    dbContext.Recommends.Add(newRecommendation);
+                }
+
+                // Save changes to the database
+                dbContext.SaveChanges();
+            }
+        }
+
     }
 }

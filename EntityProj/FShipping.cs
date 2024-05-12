@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Management;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -28,24 +29,12 @@ namespace EntityProj.Forms
 
         private void FShipping_Load(object sender, EventArgs e)
         {
-            /*
-            List<Shipping> shippings = shippingDAO.LoadList();
-            foreach (var ship in shippings)
-            {
-                if (account.Id == ship.AccountId)
-                {
-                    UCShipping uc = new UCShipping(ship);
-                    uc.SelectedChanged += UC_SelectedChanged;
-                    flpAddresses.Controls.Add(uc);
-                }
-            }
-            */
+
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            Shipping shipping = new Shipping(account.Id, txtRecipientName.Text, txtPhoneNo.Text, txtAddress.Text);
-            shippingDAO.add(shipping);
+            shippingDAO.add(account.ID, txtRecipientName.Text, txtPhoneNo.Text, txtAddress.Text);
             MessageBox.Show("Operation was successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -53,26 +42,7 @@ namespace EntityProj.Forms
         {
             this.Close();
         }
-        /*
-private void UC_SelectedChanged(object sender, EventArgs e)
-{
-// Cast the sender object back to UCShipping to access its properties
-UCShipping selectedUC = sender as UCShipping;
-selectedUC.panelBorder.BorderColor = Color.Black;
 
-
-// Iterate through each UCShipping control in the flow layout panel
-foreach (UCShipping uc in flpAddresses.Controls)
-{
-// Check if the current UCShipping control is not the one that triggered the event
-if (uc != selectedUC)
-{
-  // Disable the radio button in the current UCShipping control
-  uc.panelBorder.BorderColor = Color.Silver;
-}
-}
-}
-*/
 
     }
 }

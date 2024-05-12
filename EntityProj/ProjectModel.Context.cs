@@ -33,8 +33,8 @@ namespace EntityProj
         public virtual DbSet<ProductImage> ProductImages { get; set; }
         public virtual DbSet<ShippingInfo> ShippingInfoes { get; set; }
         public virtual DbSet<Voucher> Vouchers { get; set; }
+        public virtual DbSet<Voucher_Account> Voucher_Account { get; set; }
         public virtual DbSet<Rating> Ratings { get; set; }
         public virtual DbSet<Recommend> Recommends { get; set; }
-        public virtual DbSet<Voucher_Account> Voucher_Account { get; set; }
     }
 }

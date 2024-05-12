@@ -55,11 +55,10 @@ namespace EntityProj.Forms
                     }
                     else
                     {
-                        MessageBox.Show("Correct Password");
-                        //this.Hide();
-                        //FBuy f = new FBuy(acc);
-                        //f.Closed += (s, args) => this.Close();
-                        // f.Show();
+                        this.Hide();
+                        FBuy f = new FBuy(acc);
+                        f.Closed += (s, args) => this.Close();
+                        f.Show();
                     }
 
                 }    
@@ -77,10 +76,10 @@ namespace EntityProj.Forms
 
         private void linkForgotPw_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            //this.Hide();
-            //FForgetPassword f = new FForgetPassword();
-            //f.Closed += (s, args) => this.Close();
-            //f.Show();
+            this.Hide();
+            FForgetPassword f = new FForgetPassword();
+            f.Closed += (s, args) => this.Close();
+            f.Show();
         }
     }
 }

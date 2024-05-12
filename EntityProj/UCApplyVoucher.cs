@@ -33,8 +33,8 @@ namespace EntityProj.Forms
             this.voucher = voucher;
             lblVoucherName.Text = voucher.Name.ToString();
             lblValue.Text = "- " + voucher.Value.ToString() + " VND";
-            lblBeginDay.Text = voucher.Beginday.ToString();
-            lblEndDay.Text = voucher.Endday.ToString();
+            lblBeginDay.Text = voucher.BeginDay.ToString();
+            lblEndDay.Text = voucher.EndDay.ToString();
             account = acc;
         }
 

@@ -55,7 +55,7 @@ namespace EntityProj.Forms
         }
         private void UCReview_Load(object sender, EventArgs e)
         {
-            Account Buyer = new Account(rating.BuyerID);
+            Account Buyer = accountDAO.Retrieve(rating.BuyerID.Value);
             lblNameSeller.Text = Buyer.Name;
             convertByte(pbAvtSeller, Buyer.Avatar);
             string labeldata = rating.Comment;
@@ -69,7 +69,7 @@ namespace EntityProj.Forms
                 GenerateLabel(panelRating, ratings[i], ratings[i].Length);
             }
             lblStar.Text = rating.Star.ToString();
-            rsStar.Value = rating.Star;
+            rsStar.Value = (float)rating.Star;
             rsStar.ReadOnly = true;
             // edit UCProductCondition with minimalism
             ucProductConditionReduce.lblStatus.Visible = false;

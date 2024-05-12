@@ -27,22 +27,22 @@ namespace EntityProj.Forms
             this.voucher = voucher;
             lblVoucherName.Text = voucher.Name.ToString();
             lblValue.Text = "- " + voucher.Value.ToString() + " VND";
-            lblBeginDay.Text = voucher.Beginday.ToString();
-            lblEndDay.Text = voucher.Endday.ToString();
-            Account seller = accountDAO.Retrieve(voucher.SellerId);
+            lblBeginDay.Text = voucher.BeginDay.ToString();
+            lblEndDay.Text = voucher.EndDay.ToString();
+            Account seller = accountDAO.Retrieve(voucher.SellerID.Value);
             lblSellerName.Text = seller.Name.ToString();    
             this.account = account;
         }
 
         private void btnCollect_Click(object sender, EventArgs e)
         {
-            if(voucher.SellerId == account.Id)
+            if(voucher.SellerID == account.ID)
             {
                 MessageBox.Show("You cannot collect your own voucher", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                voucherDAO.collectVoucher(voucher.VoucherId, account.Id);
+                voucherDAO.CollectVoucher(voucher.VoucherID, account.ID);
             }
         }
     }

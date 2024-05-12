@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using EntityProj.Properties;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace EntityProj.Forms
 {
@@ -86,13 +87,13 @@ namespace EntityProj.Forms
         public void Initialize()
         {
             containerMenu.Visible = false; 
-            if (pd.CompleteTime.Year < 2024)
+            if (pd.CompleteTime.Value.Year < 2024)
             {
                 lblCompleteTime.Visible = false;
                 lblTime.Visible = false;
             } else
             {
-                lblCompleteTime.Text = pd.CompleteTime.ToString("dd-MM-yyyy");
+                lblCompleteTime.Text = pd.CompleteTime.Value.ToString("dd-MM-yyyy");
             }
             selectedCategory = pd.Category;
             txtProductTitle.Text = pd.Name;
@@ -113,16 +114,16 @@ namespace EntityProj.Forms
             cbCategory.SelectedItem = pd.Category;
             cbArea.SelectedItem = pd.Area;
             //shipping info
-            Shipping shipping = shippingDAO.GetShipping(pd.SelectedShipping);
+            ShippingInfo shipping = shippingDAO.GetShipping(pd.selectedShippingID.Value);
             if(shipping!=null)
             {
                 lblBuyerName.Text = shipping.RecipientName;
-                lblPhone.Text = shipping.PhoneNo;
+                lblPhone.Text = shipping.PhoneNumber;
                 txtAddress.Text = shipping.Address;
             }
             //
             txtCancelTime.Text = pd.CancelLimit.ToString();
-            cbCancel.Checked = pd.CancelRefund;
+            cbCancel.Checked = pd.CancelRefund.Value;
         }
 
         private void txtPrice_TextChanged(object sender, EventArgs e)
@@ -304,41 +305,67 @@ namespace EntityProj.Forms
                 return;
             }
 
-            //string category = ddCategories.SelectedValue.ToString();
-            Product product = new Product(selectedCategory, txtProductTitle.Text, txtType.Text, StringToDouble(txtBuyPrice.Text), StringToDouble(txtSellPrice.Text), selectedArea, txtCondition.Text, txtStatus.Text, txtSupportPolicy.Text, txtBrand.Text, txtOrigin.Text, txtMaterial.Text, txtSize.Text, txtFunctionalities.Text, txtDescription.Text, txtCancelTime.Text, cbCancel.Checked, acc.Id);
-            if (!edit)
+            using (var db = new Window_ProjectContext())
             {
-                product.PostedTime = DateTime.Now;
-                productDAO.Add(product);
-                //Add images to Productimages
-                product = productDAO.GetLastProduct();
-                addImage(product);
+                var product = new Product
+                {
+                    Category = selectedCategory,
+                    Name = txtProductTitle.Text,
+                    Type = txtType.Text,
+                    OriginalPrice = (decimal)StringToDouble(txtBuyPrice.Text),
+                    SalePrice = (decimal)StringToDouble(txtSellPrice.Text),
+                    Area = selectedArea,
+                    Condition = txtCondition.Text,
+                    Status = txtStatus.Text,
+                    SupportPolicy = txtSupportPolicy.Text,
+                    Brand = txtBrand.Text,
+                    Origin = txtOrigin.Text,
+                    Material = txtMaterial.Text,
+                    Size = txtSize.Text,
+                    Functionality = txtFunctionalities.Text,
+                    Description = txtDescription.Text,
+                    CancelLimit = int.Parse(txtCancelTime.Text),
+                    CancelRefund = cbCancel.Checked,
+                    SellerID = acc.ID
+                };
+                db.Products.Add(product);
+                db.SaveChanges();
+                if (!edit)
+                {
+                    product.PostedTime = DateTime.Now;
+                    productDAO.Add(product);
+                    //Add images to Productimages
+                    product = productDAO.GetLastProduct();
+                    addImage(product);
+                }
+                else
+                {
+                    //Update product
+                    pd.Category = selectedCategory;
+                    pd.Name = txtProductTitle.Text;
+                    pd.Type = txtType.Text;
+                    pd.OriginalPrice = (decimal)StringToDouble(txtBuyPrice.Text);
+                    pd.SalePrice = (decimal)StringToDouble(txtSellPrice.Text);
+                    pd.Area = selectedArea;
+                    pd.Condition = txtCondition.Text;
+                    pd.Status = txtStatus.Text;
+                    pd.SupportPolicy = txtSupportPolicy.Text;
+                    pd.Brand = txtBrand.Text;
+                    pd.Origin = txtOrigin.Text;
+                    pd.Material = txtMaterial.Text;
+                    pd.Size = txtSize.Text;
+                    pd.Functionality = txtFunctionalities.Text;
+                    pd.Description = txtDescription.Text;
+                    pd.CancelLimit = int.Parse(txtCancelTime.Text);
+                    pd.CancelRefund = cbCancel.Checked;
+                    productDAO.Update(pd, true);
+                    //Update Images (fix this code)
+                    imageDAO.Delete(pd.ID);
+                    addImage(pd);
+                }
             }
-            else
-            {
-                //Update product
-                pd.Category = selectedCategory;
-                pd.Name = txtProductTitle.Text;
-                pd.Type = txtType.Text;
-                pd.OriginalPrice = StringToDouble(txtBuyPrice.Text);
-                pd.SalePrice = StringToDouble(txtSellPrice.Text);
-                pd.Area = selectedArea;
-                pd.Condition = txtCondition.Text;
-                pd.Status = txtStatus.Text;
-                pd.SupportPolicy = txtSupportPolicy.Text;
-                pd.Brand = txtBrand.Text;
-                pd.Origin = txtOrigin.Text;
-                pd.Material = txtMaterial.Text;
-                pd.Size = txtSize.Text;
-                pd.Functionality = txtFunctionalities.Text;
-                pd.Description = txtDescription.Text;
-                pd.CancelLimit = int.Parse(txtCancelTime.Text);
-                pd.CancelRefund = cbCancel.Checked;
-                productDAO.Update(pd, true);
-                //Update Images (fix this code)
-                imageDAO.Delete(pd.Id);
-                addImage(pd);
-            }
+
+
             this.Hide();
             FBuy f = new FBuy(acc);
             f.Closed += (s, args) => this.Close();
@@ -349,19 +376,19 @@ namespace EntityProj.Forms
         {
             if (btnImage1.Image != null)
             {
-                imageDAO.Add(product.Id, ImageToByteArray(btnImage1.Image));
+                imageDAO.Add(product.ID, ImageToByteArray(btnImage1.Image));
             }
             if (btnImage2.Image != null)
             {
-                imageDAO.Add(product.Id, ImageToByteArray(btnImage2.Image));
+                imageDAO.Add(product.ID, ImageToByteArray(btnImage2.Image));
             }
             if (btnImage3.Image != null)
             {
-                imageDAO.Add(product.Id, ImageToByteArray(btnImage3.Image));
+                imageDAO.Add(product.ID, ImageToByteArray(btnImage3.Image));
             }
             if (btnImage4.Image != null)
             {
-                imageDAO.Add(product.Id, ImageToByteArray(btnImage4.Image));
+                imageDAO.Add(product.ID, ImageToByteArray(btnImage4.Image));
             }
         }
 
@@ -455,7 +482,7 @@ namespace EntityProj.Forms
 
         private void GetImageProduct()
         {
-            DataTable ImageTable = imageDAO.GetImageProduct(pd.Id);
+            DataTable ImageTable = (DataTable)imageDAO.GetImageProduct(pd.ID);
             int pictureBoxIndex = 0;
             foreach (DataRow row in ImageTable.Rows)
             {
@@ -537,7 +564,8 @@ namespace EntityProj.Forms
         {
             //Menu
             lblMenuAccountName.Text = acc.Name;
-            ratingMenuAccount.Value = acc.AvgRating;
+            AccountExtension accE = new AccountExtension(acc.ID);
+            ratingMenuAccount.Value = accE.AvgRating;
             convertByte(pbMenuAvatar, acc.Avatar);
         }
         private void convertByte(PictureBox pic, byte[] imageData)

@@ -36,7 +36,8 @@ namespace EntityProj.Forms
             SetEventForAllControls(this);
             InitializeUCProductBuy(pd, acc);
             //Check for Cancel function
-            if (DateTime.Now > pd.CancelDate() || pd.OrderCondition == (int)ordercondition.Completed)
+            ProductExtension pdE = new ProductExtension(pd);
+            if (DateTime.Now > pdE.CancelDate() || pd.OrderCondition == (int)ordercondition.Completed)
             {
                 btnCancel.Visible = false;
             }
@@ -60,7 +61,7 @@ namespace EntityProj.Forms
             lblProductCondition.Visible = false;
             lblProductName.Text = pd.Name;
 
-            byte[] imageData = imageDAO.GetImageProductData(pd.Id);
+            byte[] imageData = imageDAO.GetImageProductData(pd.ID);
 
             if (imageData != null && imageData.Length > 0)
             {
@@ -83,7 +84,7 @@ namespace EntityProj.Forms
         private void UCProductBuy_Load(object sender, EventArgs e)
         {
             SetEventForAllControls(this);
-            Account seller = accountDAO.Retrieve(product.SellerID);
+            Account seller = accountDAO.Retrieve(product.SellerID.Value);
             lblSellerName.Text = "Seller name: " + seller.Name;
             
             if(product.OrderCondition == (int)ordercondition.Completed)
@@ -177,11 +178,11 @@ namespace EntityProj.Forms
             {
                 if (checkCart)
                 {
-                    cartDAO.delete(account.Id, product.Id);
+                    cartDAO.delete(account.ID, product.ID);
                 }
                 else
                 {
-                    favoriteDAO.delete(account.Id, product.Id);
+                    favoriteDAO.delete(account.ID, product.ID);
                 }
             }
         }

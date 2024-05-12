@@ -65,7 +65,8 @@ namespace EntityProj.Forms
             //Menu
             convertByte(pBSellerAvatar, account.Avatar);
             lblMenuAccountName.Text = account.Name;
-            ratingMenuAccount.Value = account.AvgRating;
+            AccountExtension accE = new AccountExtension(account.ID);
+            ratingMenuAccount.Value = accE.AvgRating;
             convertByte(pbMenuAvatar, account.Avatar);
             // Cancel Notification
             List<Cancel_Info> list = cancelInfoDAO.LoadList(account.ID);

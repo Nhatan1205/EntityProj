@@ -74,11 +74,12 @@ namespace EntityProj.Forms
                 }
             }
             lblMenuAccountName.Text = account.Name;
-            ratingMenuAccount.Value = account.AvgRating;
+            AccountExtension accE = new AccountExtension(account.ID);
+            ratingMenuAccount.Value = accE.AvgRating;
             lblProducts.Text = "All products";
             convertByte(pbMenuAvatar, account.Avatar);
             //add recommend list
-            List<string> types = recommendDAO.GetTopThreeRecommendedTypesByBuyerID(account.Id);
+            List<string> types = recommendDAO.GetTopThreeRecommendedTypesByBuyerID(account.ID);
             List<Product> recommendedProducts = new List<Product>();
             foreach (string type in types)
             {

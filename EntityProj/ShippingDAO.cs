@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,6 +23,22 @@ namespace EntityProj
             using (var context = new Window_ProjectContext())
             {
                 return context.ShippingInfoes.ToList();
+            }
+        }
+
+        public void add(int accountid, string RecipientName, string PhoneNumber, string Address)
+        {
+            using (var db = new Window_ProjectContext())
+            {
+                var shipping = new ShippingInfo
+                {
+                    AccountID = accountid,
+                    RecipientName = RecipientName,
+                    PhoneNumber = PhoneNumber,
+                    Address = Address
+                };
+                db.ShippingInfoes.Add(shipping);
+                db.SaveChanges();
             }
         }
     }

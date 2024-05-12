@@ -71,9 +71,9 @@ namespace EntityProj.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (favoriteDAO.checkProductinFavorite(account.Id, product.Id))
+            if (favoriteDAO.checkProductinFavorite(account.ID, product.ID))
             {
-                favoriteDAO.delete(account.Id, product.Id);
+                favoriteDAO.delete(account.ID, product.ID);
                 btnSave.Text = "Save";
 
                 btnSave.FillColor = Color.Red;
@@ -81,7 +81,7 @@ namespace EntityProj.Forms
             }
             else
             {
-                favoriteDAO.add(account.Id, product.Id);
+                favoriteDAO.add(account.ID, product.ID);
                 btnSave.Text = "Saved";
 
                 btnSave.FillColor = Color.WhiteSmoke;
@@ -91,14 +91,14 @@ namespace EntityProj.Forms
 
         private void btnAddtoCart_Click(object sender, EventArgs e)
         {
-            if (cartDAO.checkProductinCart(account.Id, product.Id))
+            if (cartDAO.checkProductinCart(account.ID, product.ID))
             {
-                cartDAO.delete(account.Id, product.Id);
+                cartDAO.delete(account.ID, product.ID);
                 btnAddtoCart.Text = "Add to cart";
             }
             else
             {
-                cartDAO.add(account.Id, product.Id);
+                cartDAO.add(account.ID, product.ID);
                 btnAddtoCart.Text = "Already in your cart";
             }
         }
@@ -226,7 +226,7 @@ namespace EntityProj.Forms
             GetImageProduct();
 
             //check button save
-            if (favoriteDAO.checkProductinFavorite(account.Id, product.Id))
+            if (favoriteDAO.checkProductinFavorite(account.ID, product.ID))
             {
                 btnSave.Text = "Saved";
                 btnSave.FillColor = Color.WhiteSmoke;
@@ -239,7 +239,7 @@ namespace EntityProj.Forms
                 btnSave.ForeColor = Color.WhiteSmoke;
             }
             //check cart
-            if (cartDAO.checkProductinCart(account.Id, product.Id))
+            if (cartDAO.checkProductinCart(account.ID, product.ID))
             {
                 btnAddtoCart.Text = "Already in your cart";
             }
@@ -248,7 +248,7 @@ namespace EntityProj.Forms
                 btnAddtoCart.Text = "Add to cart";
             }
             //check seller
-            if (account.Id == product.SellerID)
+            if (account.ID == product.SellerID)
             {
                 btnSave.Visible = false;
                 btnBuy.Visible = false;
@@ -260,16 +260,18 @@ namespace EntityProj.Forms
 
 
             lblAvatarName.Text = seller.Name;
-            ratingSeller.Value = seller.AvgRating;
+            AccountExtension sellerE = new AccountExtension(seller.ID);
+            ratingSeller.Value = sellerE.AvgRating;
 
             convertByte(pbAvatar, seller.Avatar);
             // menu
             lblMenuAccountName.Text = account.Name;
-            ratingMenuAccount.Value = account.AvgRating;
+            AccountExtension accE = new AccountExtension(account.ID);
+            ratingMenuAccount.Value = accE.AvgRating;
             convertByte(pbMenuAvatar, account.Avatar);
 
             //relate products
-            List<Product> relatedProducts = productDAO.LoadSimilarProducts(product.Id, product.Type);
+            List<Product> relatedProducts = productDAO.LoadSimilarProducts(product.ID, product.Type);
             if (relatedProducts.Count > 0)
             {
                 panelRelatedProducts.Visible = true;
@@ -311,7 +313,7 @@ namespace EntityProj.Forms
 
         private void GetImageProduct()
         {
-            DataTable ImageTable = (DataTable)imageDAO.GetImageProduct(product.Id);
+            DataTable ImageTable = (DataTable)imageDAO.GetImageProduct(product.ID);
             int pictureBoxIndex = 0;
             foreach (DataRow row in ImageTable.Rows)
             {

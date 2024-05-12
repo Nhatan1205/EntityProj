@@ -89,7 +89,8 @@ namespace EntityProj.Forms
             lblHiddenNo.Text = hidden.ToString();
             //Menu
             lblMenuAccountName.Text = acc.Name;
-            ratingMenuAccount.Value = acc.AvgRating;
+            AccountExtension accE = new AccountExtension(acc.ID);
+            ratingMenuAccount.Value = accE.AvgRating;
             convertByte(pbMenuAvatar, acc.Avatar);
             //set center screen
             this.StartPosition = FormStartPosition.Manual;
@@ -259,6 +260,7 @@ namespace EntityProj.Forms
 
         private void btnChart_Click(object sender, EventArgs e)
         {
+            /*
             gunaChart1.Datasets.Clear();
             if (cbDate.SelectedIndex == 4)
             {
@@ -289,7 +291,7 @@ namespace EntityProj.Forms
                 gunaChart1.Datasets.Clear();
                 Chart.SplineYear(gunaChart1, acc.ID, YearToFilter);
             }
-
+            */
 
         }
 
@@ -327,6 +329,7 @@ namespace EntityProj.Forms
 
         private void cbDate_SelectedIndexChanged(object sender, EventArgs e)
         {
+            /*
             gvCustomer.Visible = false;
             gunaChart1.Visible = true;
             txtSpecificYear.Visible = false;
@@ -357,6 +360,7 @@ namespace EntityProj.Forms
                 txtSpecificYear.Visible = true;
                 btnChart.Visible = true;
             }
+            */
         }
 
         private void txtSpecificYear_TextChanged(object sender, EventArgs e)

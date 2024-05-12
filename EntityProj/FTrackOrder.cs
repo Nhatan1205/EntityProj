@@ -31,7 +31,7 @@ namespace EntityProj.Forms
 
         private void FTrackOrder_Load(object sender, EventArgs e)
         {
-            List<Product> products = productDAO.LoadListWithBuyerID(account.Id);
+            List<Product> products = productDAO.LoadListWithBuyerID(account.ID);
             foreach (var pd in products)
             {
                 UCProductBuy uc = new UCProductBuy(pd, account);
@@ -47,7 +47,8 @@ namespace EntityProj.Forms
             }
             //Menu
             lblMenuAccountName.Text = account.Name;
-            ratingMenuAccount.Value = account.AvgRating;
+            AccountExtension accE = new AccountExtension(account.ID);
+            ratingMenuAccount.Value = accE.AvgRating;
             convertByte(pbMenuAvatar, account.Avatar);
             //saved list
         }

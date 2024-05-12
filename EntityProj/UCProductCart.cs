@@ -44,7 +44,7 @@ namespace EntityProj.Forms
             lblPrice.Text = pd.SalePrice.ToString("N0") + " VND";
             lblProductName.Text = pd.Name;
             lblSellerName.Text = acc.Name;
-            convertByte(pbProduct, imageDAO.GetImageProductData(pd.Id));
+            convertByte(pbProduct, imageDAO.GetImageProductData(pd.ID));
         }
 
         private void convertByte(PictureBox pic, byte[] imageData)
@@ -77,7 +77,7 @@ namespace EntityProj.Forms
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            cartDAO.delete(acc.Id, pd.Id);
+            cartDAO.delete(acc.ID, pd.ID);
             // Raise the DeleteClicked event
             DeleteClicked?.Invoke(this, EventArgs.Empty);
         }

@@ -42,17 +42,17 @@ namespace EntityProj.Forms
             lblSellPrice.Text = pd.SalePrice.ToString("N0") + " VND";
             lblProductName.Text = pd.Name.ToString();
             lblArea.Text = pd.Area.ToString();
-            if(pd.PostedTime.Date == DateTime.Now.Date)
+            if(pd.PostedTime.Value.Date == DateTime.Now.Date)
             {
-                lblPostingTime.Text = (DateTime.Now.Hour - pd.PostedTime.Hour) + " hours ago";
+                lblPostingTime.Text = (DateTime.Now.Hour - pd.PostedTime.Value.Hour) + " hours ago";
             }
             else
             {
-                lblPostingTime.Text = pd.PostedTime.ToString("dd-MM-yyyy");
+                lblPostingTime.Text = pd.PostedTime.Value.ToString("dd-MM-yyyy");
             }
 
 
-            byte[] imageData = imageDAO.GetImageProductData(pd.Id);
+            byte[] imageData = imageDAO.GetImageProductData(pd.ID);
 
             if (imageData != null && imageData.Length > 0)
             {
@@ -108,9 +108,9 @@ namespace EntityProj.Forms
         private void UCProduct_DoubleClick(object sender, EventArgs e)
         {
             //if seller id is account id => not update recommned list
-            if (!(product.SellerID == account.Id))
+            if (!(product.SellerID == account.ID))
             {
-                recommendDAO.update(product.Type, account.Id);
+                recommendDAO.Update(product.Type, account.ID);
             }
             // Raise the ProductDoubleClick event
             ProductDoubleClick?.Invoke(this, EventArgs.Empty);

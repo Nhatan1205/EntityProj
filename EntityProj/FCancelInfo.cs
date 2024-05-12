@@ -43,7 +43,7 @@ namespace EntityProj.Forms
             }
             else
             {
-                cancelInfoDAO.add(product.Id, account.Id, cbReason.SelectedItem.ToString(), txtExtraInfo.Text);
+                cancelInfoDAO.add(product.ID, account.ID, cbReason.SelectedItem.ToString(), txtExtraInfo.Text);
                 //update status for product
                 product.OrderCondition = (int)ordercondition.Displaying;
                 productDAO.Update(product);
@@ -71,7 +71,7 @@ namespace EntityProj.Forms
         {
             lblProductName.Text = product.Name;
             lblPrice.Text = product.SalePrice.ToString() + "VND";
-            byte[] imageData = imageDAO.GetImageProductData(product.Id);
+            byte[] imageData = imageDAO.GetImageProductData(product.ID);
             if (imageData != null && imageData.Length > 0)
             {
                 using (MemoryStream ms = new MemoryStream(imageData))

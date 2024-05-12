@@ -54,5 +54,29 @@ namespace EntityProj
             }
         }
 
+        public void Delete(int id)
+        {
+            using (var dbContext = new Window_ProjectContext())
+            {
+                // Find the CancelInfo entity with the specified ID
+                var cancelInfo = dbContext.Cancel_Info.Find(id);
+
+                if (cancelInfo != null)
+                {
+                    // Remove the CancelInfo entity from the DbSet
+                    dbContext.Cancel_Info.Remove(cancelInfo);
+
+                    // Save changes to the database
+                    dbContext.SaveChanges();
+                }
+                else
+                {
+                    // Handle case where no CancelInfo entity was found with the specified ID
+                    MessageBox.Show($"CancelInfo with ID = {id} not found.");
+                }
+            }
+        }
+
+
     }
 }

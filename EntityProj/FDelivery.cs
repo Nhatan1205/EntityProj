@@ -84,7 +84,8 @@ namespace EntityProj.Forms
             }
             // menu
             lblMenuAccountName.Text = acc.Name;
-            ratingMenuAccount.Value = acc.AvgRating;
+            AccountExtension accE = new AccountExtension(acc.ID);
+            ratingMenuAccount.Value = accE.AvgRating;
             convertByte(pbMenuAvatar, acc.Avatar);
 
         }
@@ -328,7 +329,7 @@ namespace EntityProj.Forms
             // Cast the sender object back to UCShipping to access its properties
             UCShipping selectedUC = sender as UCShipping;
             selectedUC.panelBorder.BorderColor = Color.Black;
-            acc.selectedShippingID = selectedUC.Shipping.Id;
+            acc.selectedShippingID = selectedUC.Shipping.ID;
             accountDAO.Update(acc);
 
             // Iterate through each UCShipping control in the flow layout panel

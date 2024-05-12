@@ -170,10 +170,12 @@ namespace EntityProj.Forms
 
         private void FInformation_Load(object sender, EventArgs e)
         {
-            ratingAcc.Value = account.AvgRating;
+
+            AccountExtension accE = new AccountExtension(account.ID);
+            ratingAcc.Value = accE.AvgRating;
             //menu 
             lblMenuAccountName.Text = account.Name;
-            ratingMenuAccount.Value = account.AvgRating;
+            ratingMenuAccount.Value = accE.AvgRating;
             convertByte(pbMenuAvatar, account.Avatar);
         }
 

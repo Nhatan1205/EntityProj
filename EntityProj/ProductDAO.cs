@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Migrations;
+using System.Data.Entity.SqlServer;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
@@ -30,12 +33,12 @@ namespace EntityProj
         {
             using (var context = new Window_ProjectContext())
             {
-                // Lấy danh sách sản phẩm được đề xuất (top 3) cho một loại (type) cụ thể
+                // Use SqlFunctions.PatIndex to perform pattern matching for comparison
                 var recommendedProducts = context.Products
-                                                   .Where(p => p.Type == type)
-                                                   .OrderByDescending(p => p.ViewCount)
-                                                   .Take(3)
-                                                   .ToList();
+                    .Where(p => SqlFunctions.PatIndex(type, p.Type) > 0)
+                    .OrderByDescending(p => p.ViewCount)
+                    .Take(3)
+                    .ToList();
 
                 return recommendedProducts;
             }
@@ -194,5 +197,136 @@ namespace EntityProj
                 return product; // Returns the Product entity or null if not found
             }
         }
+
+        public void Add(Product pd)
+        {
+            using (var dbContext = new Window_ProjectContext())
+            {
+                dbContext.Products.Add(pd);
+                dbContext.SaveChanges();
+            }
+        }
+
+        public Product GetLastProduct()
+        {
+            using (var dbContext = new Window_ProjectContext())
+            {
+                // Query using Entity Framework to get the last product based on Id in descending order
+                var lastProduct = dbContext.Products
+                                           .OrderByDescending(p => p.ID)
+                                           .FirstOrDefault();
+
+                return lastProduct;
+            }
+        }
+
+        public List<Product> LoadListWithBuyerID(int buyerId)
+        {
+            using (var dbContext = new Window_ProjectContext())
+            {
+                // Query using Entity Framework to get products with the specified BuyerID
+                var products = dbContext.Products
+                                        .Where(p => p.BuyerID == buyerId)
+                                        .ToList();
+
+                return products;
+            }
+        }
+
+        public void Delete(Product product)
+        {
+            using (var dbContext = new Window_ProjectContext())
+            {
+                // Attach the product to the DbContext if not already tracked
+                dbContext.Products.Attach(product);
+
+                // Remove the product from the Products DbSet
+                dbContext.Products.Remove(product);
+
+                // Save changes to the database
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void UpdateOrderCondition(Product product)
+        {
+            using (var dbContext = new Window_ProjectContext())
+            {
+                // Retrieve the product from the database by its ID
+                var existingProduct = dbContext.Products.Find(product.ID);
+
+                if (existingProduct != null)
+                {
+                    // Update the BuyerID and OrderCondition of the existing product
+                    existingProduct.BuyerID = product.BuyerID;
+                    existingProduct.OrderCondition = product.OrderCondition;
+
+                    // Set CompleteTime if OrderCondition is 'Completed'
+                    if (product.OrderCondition == (int)ordercondition.Completed)
+                    {
+                        existingProduct.CompleteTime = DateTime.Now;
+                    }
+                    else
+                    {
+                        existingProduct.CompleteTime = null; // Clear CompleteTime if not 'Completed'
+                    }
+
+                    // Save changes to the database
+                    dbContext.SaveChanges();
+                }
+                else
+                {
+                    // Handle case where no product was found with the specified ID
+                    MessageBox.Show($"Product with ID = {product.ID} not found.");
+                }
+            }
+        }
+
+        /*
+        public DataTable ProfitEveryHour(int id, DateTime targetDate)
+        {
+            DataTable dt = new DataTable();
+
+            // Define columns for the DataTable
+            dt.Columns.Add("HourNumber", typeof(int));
+            dt.Columns.Add("TotalEarnings", typeof(decimal));
+
+            // Initialize the list of hourly profits
+            List<object[]> hourlyProfits = new List<object[]>();
+
+            // Establish database connection and execute query
+            using (var db = new Window_ProjectContext())
+            {
+                var query =
+                    from hour in Enumerable.Range(1, 24)
+                    join product in db.Products
+                        on new { HourNumber = hour, Date = targetDate.Date, SellerID = id }
+                        equals new { HourNumber = product.CompleteTime.Value.Hour, Date = product.CompleteTime.Value.Date, SellerID = product.SellerID }
+                        into hourProducts
+                    from p in hourProducts.DefaultIfEmpty()
+                    group p by hour into g
+                    select new
+                    {
+                        HourNumber = g.Key,
+                        TotalEarnings = g.Sum(p => p != null ? p.SalePrice : 0)
+                    };
+
+                foreach (var result in query)
+                {
+                    hourlyProfits.Add(new object[] { result.HourNumber, result.TotalEarnings });
+                }
+            }
+
+            // Populate the DataTable with the hourly profit data
+            foreach (var profit in hourlyProfits)
+            {
+                dt.Rows.Add(profit);
+            }
+
+            return dt;
+        }
+        */
+
+
     }
 }

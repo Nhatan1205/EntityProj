@@ -33,7 +33,7 @@ namespace EntityProj.Forms
         private void FSaveList_Load(object sender, EventArgs e)
         {
 
-            List<Product> products = favoriteDAO.loadListWithAccountID(account.Id);
+            List<Product> products = favoriteDAO.loadListWithAccountID(account.ID);
             double total = 0;
             foreach (var pd in products)
             {
@@ -43,7 +43,8 @@ namespace EntityProj.Forms
             }
             //Menu
             lblMenuAccountName.Text = account.Name;
-            ratingMenuAccount.Value = account.AvgRating;
+            AccountExtension accE = new AccountExtension(account.ID);
+            ratingMenuAccount.Value = accE.AvgRating;
             convertByte(pbMenuAvatar, account.Avatar);
 
         }

@@ -78,7 +78,7 @@ namespace EntityProj.Forms
             Dock = DockStyle.Top;
             if(!(product.BuyerID <=0 || product.BuyerID == null))
             {
-                Account Buyer = accountDAO.Retrieve(product.BuyerID);
+                Account Buyer = accountDAO.Retrieve(product.BuyerID.Value);
                 lblBuyerName.Text = "Buyer name: " + Buyer.Name;
             }
             else
@@ -108,10 +108,11 @@ namespace EntityProj.Forms
             }
 
             lblPrice.Text = product.SalePrice.ToString("N0") + " VND";
-            lblProductCondition.Text = product.GetBillStatus();
             lblProductCondition.Visible = false;
             lblProductName.Text = product.Name;
-            convertByte(pbProduct, imageDAO.GetImageProductData(product.Id));
+            ProductExtension pdE = new ProductExtension(product);
+            lblProductCondition.Text = pdE.GetBillStatus();
+            convertByte(pbProduct, imageDAO.GetImageProductData(product.ID));
         }
 
         private void convertByte(PictureBox pic, byte[] imageData)
@@ -138,16 +139,16 @@ namespace EntityProj.Forms
         private void btnCancel_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("The product will be deleted in the system. Do you want to proceed?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            account.Money -= product.SalePrice;
-            accountDAO.update(account);
+            account.Money -= (float)product.SalePrice;
+            accountDAO.Update(account);
             //get seller
-            Account Buyer = accountDAO.Retrieve(product.BuyerID);
-            Buyer.Money += product.SalePrice;
-            accountDAO.update(Buyer);
+            Account Buyer = accountDAO.Retrieve(product.BuyerID.Value);
+            Buyer.Money += (float)product.SalePrice;
+            accountDAO.Update(Buyer);
             if (result == DialogResult.Yes)
             {
                 productDAO.Delete(product);
-                imageDAO.Delete(product.Id);
+                imageDAO.Delete(product.ID);
                 MessageBox.Show("The product has been successfully deleted from the system.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }

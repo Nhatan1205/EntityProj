@@ -110,7 +110,8 @@ namespace EntityProj.Forms
             }
             //Menu
             lblMenuAccountName.Text = acc.Name;
-            ratingMenuAccount.Value = acc.AvgRating;
+            AccountExtension accE = new AccountExtension(acc.ID);
+            ratingMenuAccount.Value = accE.AvgRating;
             convertByte(pbMenuAvatar, acc.Avatar);
         }
         private void convertByte(PictureBox pic, byte[] imageData)

@@ -12,9 +12,9 @@ namespace EntityProj.Forms
 {
     public partial class UCShipping : UserControl
     {
-        Shipping shipping = new Shipping();
+        ShippingInfo shipping = new ShippingInfo();
 
-        public Shipping Shipping { get => shipping; set => shipping = value; }
+        public ShippingInfo Shipping { get => shipping; set => shipping = value; }
 
         public event EventHandler<EventArgs> SelectedChanged;
 
@@ -32,7 +32,7 @@ namespace EntityProj.Forms
             shipping = ship;
             lblRecipientName.Text = shipping.RecipientName.ToString();
             lblAddress.Text = shipping.Address.ToString();
-            lblPhoneNo.Text = shipping.PhoneNo.ToString();
+            lblPhoneNo.Text = shipping.PhoneNumber.ToString();
         }
 
         

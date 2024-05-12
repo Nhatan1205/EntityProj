@@ -9,13 +9,13 @@
         <EntityTypeShape EntityType="Window_ProjectModel.Cancel_Info" Width="1.5" PointX="2.125" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Window_ProjectModel.Cart" Width="1.5" PointX="2.75" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Window_ProjectModel.Favorite" Width="1.5" PointX="4.75" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Window_ProjectModel.Product" Width="1.5" PointX="4.875" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Window_ProjectModel.Product" Width="1.5" PointX="4.875" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Window_ProjectModel.ProductImage" Width="1.5" PointX="6.75" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Window_ProjectModel.ShippingInfo" Width="1.5" PointX="2.75" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Window_ProjectModel.Voucher" Width="1.5" PointX="7.25" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Window_ProjectModel.Rating" Width="1.5" PointX="8.375" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Window_ProjectModel.Recommend" Width="1.5" PointX="9.25" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Window_ProjectModel.Voucher_Account" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="Window_ProjectModel.Voucher_Account" Width="1.5" PointX="0.75" PointY="5.375" />
+        <EntityTypeShape EntityType="Window_ProjectModel.Rating" Width="1.5" PointX="7.375" PointY="6.75" />
+        <EntityTypeShape EntityType="Window_ProjectModel.Recommend" Width="1.5" PointX="9.375" PointY="6.625" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

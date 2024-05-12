@@ -15,7 +15,7 @@ namespace EntityProj.Forms
     {
         private Product pd;
         private Account acc;
-        private CancelInfo ci; 
+        private Cancel_Info ci; 
         private ProductDAO productDAO = new ProductDAO();
         private AccountDAO accountDAO = new AccountDAO();
         private ImageDAO imageDAO = new ImageDAO(); 
@@ -41,7 +41,7 @@ namespace EntityProj.Forms
             lblReason.Text = ci.Reason;
             lblSellerName.Text = acc.Name;
             txtDescription.Text = ci.ExtraInfo;
-            convertByte(pbProduct, imageDAO.GetImageProductData(ci.ProductID));
+            convertByte(pbProduct, imageDAO.GetImageProductData(ci.ProductID.Value));
         }
 
         private void convertByte(PictureBox pic, byte[] imageData)
@@ -72,7 +72,7 @@ namespace EntityProj.Forms
             // Check if the user clicked "Yes"
             if (result == DialogResult.Yes)
             {
-                cancelInfoDAO.delete(ci.Id);
+                cancelInfoDAO.Delete(ci.ID);
             }
         }
     }

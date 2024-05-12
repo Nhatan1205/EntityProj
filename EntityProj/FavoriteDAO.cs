@@ -78,7 +78,7 @@ namespace EntityProj
                                               .ToList();
 
                     productList = dbContext.Products
-                                          .Where(p => productIDs.Contains(p.Id))
+                                          .Where(p => productIDs.Contains(p.ID))
                                           .ToList();
                 }
 

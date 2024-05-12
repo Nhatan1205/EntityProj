@@ -34,7 +34,7 @@ namespace EntityProj.Forms
             btnWatchReview.Visible = false;
             this.account = acc;
             this.product = pd;
-            Seller = new Account(pd.SellerID);
+            Seller = accountDAO.Retrieve(pd.SellerID.Value);
             ratingList = ratingDAO.LoadList(Seller);
         }
 
@@ -47,15 +47,16 @@ namespace EntityProj.Forms
             }
             lblNameSeller.Text = Seller.Name;
             convertByte(pbAvatarSeller, Seller.Avatar);
-            lblStar.Text = Seller.AvgRating.ToString();
-            rsStar.Value = Seller.AvgRating;
+            AccountExtension sellerE = new AccountExtension(Seller.ID);
+            lblStar.Text = sellerE.AvgRating.ToString();
+            rsStar.Value = sellerE.AvgRating;
             lblArea.Text = "Area: " + Seller.Address;
             lblPhone.Text = "Contact Phone: " + Seller.Phone;
             DataTable dt = new DataTable();
-            dt = ratingDAO.load(Seller);
+            dt = ratingDAO.Load(Seller);
             lblNumberRatings.Text = dt.Rows.Count.ToString() + " ratings";
             List<Product> listpd = new List<Product>();
-            listpd = productDAO.LoadListWithCondition("", Seller.Id);
+            listpd = productDAO.LoadListWithCondition("", Seller.ID);
             lblNumberofproducts.Text = "Products: " + listpd.Count.ToString();
             int completed = 0;
             foreach (Product pd in listpd)
@@ -69,7 +70,8 @@ namespace EntityProj.Forms
 
             //menu
             lblMenuAccountName.Text = account.Name;
-            ratingMenuAccount.Value = account.AvgRating;
+            AccountExtension accE = new AccountExtension(account.ID);
+            ratingMenuAccount.Value = accE.AvgRating;
             convertByte(pbMenuAvatar, account.Avatar);
         }
         private void convertByte(PictureBox pic, byte[] imageData)
@@ -226,7 +228,7 @@ namespace EntityProj.Forms
             btnWatchProducts.Visible = false;
             btnWatchReview.Visible = true;
             flpRating.Controls.Clear();
-            List<Product> products = productDAO.LoadListWithCondition("", Seller.Id);
+            List<Product> products = productDAO.LoadListWithCondition("", Seller.ID);
             foreach (var pd in products)
             {
                 if (pd.BuyerID <= 0 && pd.OrderCondition <= (int)ordercondition.Displaying)
