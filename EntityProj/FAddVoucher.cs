@@ -34,8 +34,19 @@ namespace EntityProj.Forms
             }
             else
             {
-                Voucher voucher = new Voucher(account.Id, txtVoucherName.Text, StringToDouble(txtVoucherValue.Text), dtBeginday.Value, dtEndDay.Value);
-                voucherDAO.add(voucher);
+                using (var context = new Window_ProjectContext())
+                {
+                    var voucher = new Voucher 
+                    { 
+                        SellerID = account.Id,
+                        Name = txtVoucherName.Text,
+                        Value = (Decimal)StringToDouble(txtVoucherValue.Text),
+                        BeginDay = dtBeginday.Value,
+                        EndDay = dtEndDay.Value,
+                    };
+                    context.Vouchers.Add(voucher);
+                }
+
                 MessageBox.Show("Operation was successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }

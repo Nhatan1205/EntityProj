@@ -43,25 +43,24 @@ namespace EntityProj.Forms
             }
             else
             {
-                CancelInfo cancelInfo = new CancelInfo(product.Id, account.Id, cbReason.SelectedItem.ToString(), txtExtraInfo.Text);
-                cancelInfoDAO.add(cancelInfo);
+                cancelInfoDAO.add(product.Id, account.Id, cbReason.SelectedItem.ToString(), txtExtraInfo.Text);
                 //update status for product
                 product.OrderCondition = (int)ordercondition.Displaying;
                 productDAO.Update(product);
                 productDAO.DeleteBuyerID(product);
                 //get seller
-                if (product.PayMethod)
+                if (product.PayMethod.Value)
                 {
-                    Account Seller = accountDAO.Retrieve(product.SellerID);
-                    Seller.Money -= product.SalePrice;
-                    accountDAO.update(Seller);
+                    Account Seller = accountDAO.Retrieve(product.SellerID.Value);
+                    Seller.Money -= (float)product.SalePrice;
+                    accountDAO.Update(Seller);
                 }
                 //refund if product is allowed to refund && Online payment
-                if (product.CancelRefund && product.PayMethod)
+                if (product.CancelRefund.Value && product.PayMethod.Value)
                 {
-                    Account Buyer = accountDAO.Retrieve(product.BuyerID);
-                    Buyer.Money += product.SalePrice;
-                    accountDAO.update(Buyer);
+                    Account Buyer = accountDAO.Retrieve(product.BuyerID.Value);
+                    Buyer.Money += (float)product.SalePrice;
+                    accountDAO.Update(Buyer);
                 }
                 MessageBox.Show("Operation was successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();

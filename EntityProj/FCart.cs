@@ -231,7 +231,7 @@ namespace EntityProj.Forms
                     if (uc.cbSelected.Checked)
                     {
                         itemCount++;
-                        totalMoney += uc.Pd.SalePrice; // Assuming Product has a property 'Price'
+                        totalMoney += (double)uc.Pd.SalePrice; // Assuming Product has a property 'Price'
                     }
                 }
             }

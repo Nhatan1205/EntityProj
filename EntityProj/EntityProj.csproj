@@ -170,12 +170,14 @@
       <DependentUpon>ProjectModel.tt</DependentUpon>
     </Compile>
     <Compile Include="AccountDAO.cs" />
+    <Compile Include="CancelInfoDAO.cs" />
     <Compile Include="Cancel_Info.cs">
       <DependentUpon>ProjectModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Cart.cs">
       <DependentUpon>ProjectModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CartDAO.cs" />
     <Compile Include="FAddVoucher.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -185,6 +187,7 @@
     <Compile Include="Favorite.cs">
       <DependentUpon>ProjectModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="FavoriteDAO.cs" />
     <Compile Include="FBuy.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -214,6 +217,12 @@
     </Compile>
     <Compile Include="FDelivery.designer.cs">
       <DependentUpon>FDelivery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FForgetPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FForgetPassword.designer.cs">
+      <DependentUpon>FForgetPassword.cs</DependentUpon>
     </Compile>
     <Compile Include="FInformation.cs">
       <SubType>Form</SubType>
@@ -299,6 +308,7 @@
     <Compile Include="FVoucher.designer.cs">
       <DependentUpon>FVoucher.cs</DependentUpon>
     </Compile>
+    <Compile Include="ImageDAO.cs" />
     <Compile Include="Product.cs">
       <DependentUpon>ProjectModel.tt</DependentUpon>
     </Compile>
@@ -329,6 +339,8 @@
     <Compile Include="Recommend.cs">
       <DependentUpon>ProjectModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="RecommendDAO.cs" />
+    <Compile Include="ShippingDAO.cs" />
     <Compile Include="ShippingInfo.cs">
       <DependentUpon>ProjectModel.tt</DependentUpon>
     </Compile>
@@ -380,9 +392,22 @@
     <Compile Include="UCReview.designer.cs">
       <DependentUpon>UCReview.cs</DependentUpon>
     </Compile>
+    <Compile Include="UCShipping.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCShipping.designer.cs">
+      <DependentUpon>UCShipping.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCVoucher.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCVoucher.designer.cs">
+      <DependentUpon>UCVoucher.cs</DependentUpon>
+    </Compile>
     <Compile Include="Voucher.cs">
       <DependentUpon>ProjectModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="VoucherDAO.cs" />
     <EmbeddedResource Include="FAddVoucher.resx">
       <DependentUpon>FAddVoucher.cs</DependentUpon>
     </EmbeddedResource>
@@ -400,6 +425,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FDelivery.resx">
       <DependentUpon>FDelivery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FForgetPassword.resx">
+      <DependentUpon>FForgetPassword.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FInformation.resx">
       <DependentUpon>FInformation.cs</DependentUpon>
@@ -476,6 +504,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UCReview.resx">
       <DependentUpon>UCReview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCShipping.resx">
+      <DependentUpon>UCShipping.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCVoucher.resx">
+      <DependentUpon>UCVoucher.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <EntityDeploy Include="ProjectModel.edmx">

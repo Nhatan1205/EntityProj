@@ -17,7 +17,7 @@ namespace EntityProj.Forms
     {
         private ProductDAO productDAO = new ProductDAO();
         private Account account = new Account();
-        //private RecommendDAO recommendDAO = new RecommendDAO();
+        private RecommendDAO recommendDAO = new RecommendDAO();
         private bool save;
 
 
@@ -115,12 +115,12 @@ namespace EntityProj.Forms
         // Event handler for UCProduct's ProductDoubleClick event
         private void UCProduct_ProductDoubleClick(object sender, EventArgs e)
         {
-            //// Hide the current form (FBuy)
-            //this.Hide();
-            //// Open the FBuyDetail form
-            //FBuyDetail fBuyDetail = new FBuyDetail((sender as UCProduct).Product, account);
-            //fBuyDetail.Closed += (s, args) => this.Close();
-            //fBuyDetail.Show();
+            // Hide the current form (FBuy)
+            this.Hide();
+            // Open the FBuyDetail form
+            FBuyDetail fBuyDetail = new FBuyDetail((sender as UCProduct).Product, account);
+            fBuyDetail.Closed += (s, args) => this.Close();
+            fBuyDetail.Show();
         }
 
 
@@ -194,8 +194,9 @@ namespace EntityProj.Forms
             }
             getFilter();
             */
+
         }
-   
+
         private void btnLoad_Click(object sender, EventArgs e)
         {
             FBuy_Load(sender, e);
@@ -203,118 +204,118 @@ namespace EntityProj.Forms
 
         private void btnFilter_Click(object sender, EventArgs e)
         {
-            //List<Product> products = productDAO.LoadList();
-            //List<Product> productWithoutBuyerAndDisplaying = new List<Product>();
-            ////get product without buyid and having condition displaying
-            //foreach (var pd in products)
-            //{
-            //    if ((pd.BuyerID == null || pd.BuyerID <= 0) && pd.OrderCondition == (int)ordercondition.Displaying)
-            //    {
-            //        productWithoutBuyerAndDisplaying.Add(pd);
-            //    }
-            //}
-            //string productName = txtProductName.Text;
-            //string brand = txtBrand.Text;
-            //double maxPrice = double.TryParse(txtMaxPrice.Text, out double parsedMaxPrice) ? parsedMaxPrice : double.MaxValue;
-            //double minPrice = double.TryParse(txtMinPrice.Text, out double parsedMinPrice) ? parsedMinPrice : double.MinValue;
-            //string selectedCategory = ddCategories.SelectedItem?.ToString();
+            List<Product> products = productDAO.LoadList();
+            List<Product> productWithoutBuyerAndDisplaying = new List<Product>();
+            //get product without buyid and having condition displaying
+            foreach (var pd in products)
+            {
+                if ((pd.BuyerID == null || pd.BuyerID <= 0) && pd.OrderCondition == (int)ordercondition.Displaying)
+                {
+                    productWithoutBuyerAndDisplaying.Add(pd);
+                }
+            }
+            string productName = txtProductName.Text;
+            string brand = txtBrand.Text;
+            double maxPrice = double.TryParse(txtMaxPrice.Text, out double parsedMaxPrice) ? parsedMaxPrice : double.MaxValue;
+            double minPrice = double.TryParse(txtMinPrice.Text, out double parsedMinPrice) ? parsedMinPrice : double.MinValue;
+            string selectedCategory = ddCategories.SelectedItem?.ToString();
 
-            //// Filter products based on the specified conditions
-            //List<Product> filteredProducts = productWithoutBuyerAndDisplaying.Where(pd =>
-            //    (string.IsNullOrEmpty(productName) || pd.Name.ToLower().Contains(productName.ToLower())) &&
-            //    (string.IsNullOrEmpty(brand) || pd.Brand.ToLower().Contains(brand.ToLower())) &&
-            //    (pd.SalePrice >= minPrice && pd.SalePrice <= maxPrice) &&
-            //    (string.IsNullOrEmpty(selectedCategory) || pd.Category == selectedCategory)
-            //).ToList();
+            // Filter products based on the specified conditions
+            List<Product> filteredProducts = productWithoutBuyerAndDisplaying.Where(pd =>
+                (string.IsNullOrEmpty(productName) || pd.Name.ToLower().Contains(productName.ToLower())) &&
+                (string.IsNullOrEmpty(brand) || pd.Brand.ToLower().Contains(brand.ToLower())) &&
+                (pd.SalePrice >= (decimal)minPrice && pd.SalePrice <= (decimal)maxPrice) &&
+                (string.IsNullOrEmpty(selectedCategory) || pd.Category == selectedCategory)
+            ).ToList();
 
-            //// Clear existing products in the flow layout panel
-            //for (int i = flpProduct.Controls.Count - 1; i >= 0; i--)
-            //{
-            //    Control control = flpProduct.Controls[i];
-            //    if (control is UCProduct)
-            //    {
-            //        flpRecommendProducts.Controls.Remove(control);
-            //        control.Dispose();
-            //    }
-            //}
+            // Clear existing products in the flow layout panel
+            for (int i = flpProduct.Controls.Count - 1; i >= 0; i--)
+            {
+                Control control = flpProduct.Controls[i];
+                if (control is UCProduct)
+                {
+                    flpRecommendProducts.Controls.Remove(control);
+                    control.Dispose();
+                }
+            }
 
-            //// Add filtered products to the flow layout panel
-            //foreach (var pd in filteredProducts)
-            //{
-            //    UCProduct uc = new UCProduct(pd, account);
-            //    uc.ProductDoubleClick += UCProduct_ProductDoubleClick;
-            //    flpProduct.Controls.Add(uc);
-            //}
-            ////
-            //flpRecommendProducts.Visible = false;
-            //panelRecommendProducts.Visible = false;
-            //panelRecommend.Visible = false;
-            //lblProducts.Text = "Filtered products";
+            // Add filtered products to the flow layout panel
+            foreach (var pd in filteredProducts)
+            {
+                UCProduct uc = new UCProduct(pd, account);
+                uc.ProductDoubleClick += UCProduct_ProductDoubleClick;
+                flpProduct.Controls.Add(uc);
+            }
+            //
+            flpRecommendProducts.Visible = false;
+            panelRecommendProducts.Visible = false;
+            panelRecommend.Visible = false;
+            lblProducts.Text = "Filtered products";
         }
 
 
         private void btnCart_Click(object sender, EventArgs e)
         {
-            //this.Hide();
-            //FCart f = new FCart(account);
-            //f.Closed += (s, args) => this.Close();
-            //f.Show();
+            this.Hide();
+            FCart f = new FCart(account);
+            f.Closed += (s, args) => this.Close();
+            f.Show();
         }
 
         private void btnPostProduct_Click(object sender, EventArgs e)
         {
-            //this.Hide();
-            //FSellDetail f = new FSellDetail(account);
-            //f.Closed += (s, args) => this.Close();
-            //f.Show();
+            this.Hide();
+            FSellDetail f = new FSellDetail(account);
+            f.Closed += (s, args) => this.Close();
+            f.Show();
         }
 
         private void btnPurchasesOrder_Click(object sender, EventArgs e)
         {
-            //this.Hide();
-            //FTrackOrder f = new FTrackOrder(account);
-            //f.Closed += (s, args) => this.Close();
-            //f.Show();
+            this.Hide();
+            FTrackOrder f = new FTrackOrder(account);
+            f.Closed += (s, args) => this.Close();
+            f.Show();
         }
 
         private void btnSalesOrder_Click(object sender, EventArgs e)
         {
-            //this.Hide();
-            //FProductManagement f = new FProductManagement(account);
-            //f.Closed += (s, args) => this.Close();
-            //f.Show();
+            this.Hide();
+            FProductManagement f = new FProductManagement(account);
+            f.Closed += (s, args) => this.Close();
+            f.Show();
         }
 
         private void btnSavedProducts_Click(object sender, EventArgs e)
         {
-            //this.Hide();
-            //FSaveList f = new FSaveList(account);
-            //f.Closed += (s, args) => this.Close();
-            //f.Show();
+            this.Hide();
+            FSaveList f = new FSaveList(account);
+            f.Closed += (s, args) => this.Close();
+            f.Show();
         }
 
         private void btnOrderAnalysis_Click(object sender, EventArgs e)
         {
-            //this.Hide();
-            //FOrderAnalysis f = new FOrderAnalysis(account);
-            //f.Closed += (s, args) => this.Close();
-            //f.Show();
+            this.Hide();
+            FOrderAnalysis f = new FOrderAnalysis(account);
+            f.Closed += (s, args) => this.Close();
+            f.Show();
         }
 
         private void btnInformation_Click(object sender, EventArgs e)
         {
-            //this.Hide();
-            //FInformation f = new FInformation(account);
-            //f.Closed += (s, args) => this.Close();
-            //f.Show();
+            this.Hide();
+            FInformation f = new FInformation(account);
+            f.Closed += (s, args) => this.Close();
+            f.Show();
         }
 
         private void btnMoney_Click(object sender, EventArgs e)
         {
-            //this.Hide();
-            //FMoney f = new FMoney(account);
-            //f.Closed += (s, args) => this.Close();
-            //f.Show();
+            this.Hide();
+            FMoney f = new FMoney(account);
+            f.Closed += (s, args) => this.Close();
+            f.Show();
         }
 
         private void btnLogout_Click_1(object sender, EventArgs e)
@@ -344,10 +345,10 @@ namespace EntityProj.Forms
 
         private void btnVoucher_Click(object sender, EventArgs e)
         {
-            //this.Hide();
-            //FVoucher f = new FVoucher(account);
-            //f.Closed += (s, args) => this.Close();
-            //f.Show();
+            this.Hide();
+            FVoucher f = new FVoucher(account);
+            f.Closed += (s, args) => this.Close();
+            f.Show();
         }
     }
 }

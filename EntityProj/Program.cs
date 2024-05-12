@@ -9,6 +9,13 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace EntityProj
 {
+    public enum ordercondition
+    {
+        Displaying,
+        WaitforConfirmation,
+        Completed,
+        hidden
+    }
     internal static class Program
     {
         /// <summary>

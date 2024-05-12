@@ -16,10 +16,10 @@ namespace EntityProj.Forms
 {
     public partial class FBuyDetail : Form
     {
-        //private ImageDAO imageDAO = new ImageDAO();
+        private ImageDAO imageDAO = new ImageDAO();
         private ProductDAO productDAO = new ProductDAO();
-       // private FavoriteDAO favoriteDAO = new FavoriteDAO();
-        //private CartDAO cartDAO = new CartDAO();
+        private FavoriteDAO favoriteDAO = new FavoriteDAO();
+        private CartDAO cartDAO = new CartDAO();
         private Account account = new Account();
         private AccountDAO accountDAO = new AccountDAO();
         private Product product = new Product();
@@ -33,12 +33,12 @@ namespace EntityProj.Forms
 
         public FBuyDetail(Product pd,Account acc)
         {
-            //InitializeComponent();
-            //containerMenu.Visible = false;
-            //account = acc;
-            //product = pd;
-            //product.ViewCount++;
-            //productDAO.Update(product);
+            InitializeComponent();
+            containerMenu.Visible = false;
+            account = acc;
+            product = pd;
+            product.ViewCount++;
+            productDAO.Update(product);
         }
 
         private void convertByte(PictureBox pic, byte[] imageData)
@@ -71,52 +71,52 @@ namespace EntityProj.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            //if (favoriteDAO.checkProductinFavorite(account.Id, product.Id))
-            //{
-            //    favoriteDAO.delete(account.Id, product.Id);
-            //    btnSave.Text = "Save";
+            if (favoriteDAO.checkProductinFavorite(account.Id, product.Id))
+            {
+                favoriteDAO.delete(account.Id, product.Id);
+                btnSave.Text = "Save";
 
-            //    btnSave.FillColor = Color.Red;
-            //    btnSave.ForeColor = Color.WhiteSmoke;
-            //}
-            //else
-            //{
-            //    favoriteDAO.add(account.Id, product.Id);
-            //    btnSave.Text = "Saved";
+                btnSave.FillColor = Color.Red;
+                btnSave.ForeColor = Color.WhiteSmoke;
+            }
+            else
+            {
+                favoriteDAO.add(account.Id, product.Id);
+                btnSave.Text = "Saved";
 
-            //    btnSave.FillColor = Color.WhiteSmoke;
-            //    btnSave.ForeColor = Color.Red;
-            //}
+                btnSave.FillColor = Color.WhiteSmoke;
+                btnSave.ForeColor = Color.Red;
+            }
         }
 
         private void btnAddtoCart_Click(object sender, EventArgs e)
         {
-            //if (cartDAO.checkProductinCart(account.Id, product.Id))
-            //{
-            //    cartDAO.delete(account.Id, product.Id);
-            //    btnAddtoCart.Text = "Add to cart";
-            //}
-            //else
-            //{
-            //    cartDAO.add(account.Id, product.Id);
-            //    btnAddtoCart.Text = "Already in your cart";
-            //}
+            if (cartDAO.checkProductinCart(account.Id, product.Id))
+            {
+                cartDAO.delete(account.Id, product.Id);
+                btnAddtoCart.Text = "Add to cart";
+            }
+            else
+            {
+                cartDAO.add(account.Id, product.Id);
+                btnAddtoCart.Text = "Already in your cart";
+            }
         }
 
         private void btnCart_Click(object sender, EventArgs e)
         {
-            //this.Hide();
-            //FCart f = new FCart(account);
-            //f.Closed += (s, args) => this.Close();
-            //f.Show();
+            this.Hide();
+            FCart f = new FCart(account);
+            f.Closed += (s, args) => this.Close();
+            f.Show();
         }
 
         private void btnPostProduct_Click(object sender, EventArgs e)
         {
-            //this.Hide();
-            //FSellDetail f = new FSellDetail(account);
-            //f.Closed += (s, args) => this.Close();
-            //f.Show();
+            this.Hide();
+            FSellDetail f = new FSellDetail(account);
+            f.Closed += (s, args) => this.Close();
+            f.Show();
         }
 
         private void btnMenu_Click(object sender, EventArgs e)
@@ -133,50 +133,50 @@ namespace EntityProj.Forms
 
         private void btnPurchasesOrder_Click(object sender, EventArgs e)
         {
-            //this.Hide();
-            //FTrackOrder f = new FTrackOrder(account);
-            //f.Closed += (s, args) => this.Close();
-            //f.Show();
+            this.Hide();
+            FTrackOrder f = new FTrackOrder(account);
+            f.Closed += (s, args) => this.Close();
+            f.Show();
         }
 
         private void btnSalesOrder_Click(object sender, EventArgs e)
         {
-            //this.Hide();
-            //FProductManagement f = new FProductManagement(account);
-            //f.Closed += (s, args) => this.Close();
-            //f.Show();
+            this.Hide();
+            FProductManagement f = new FProductManagement(account);
+            f.Closed += (s, args) => this.Close();
+            f.Show();
         }
 
         private void btnSavedProducts_Click(object sender, EventArgs e)
         {
-            //this.Hide();
-            //FSaveList f = new FSaveList(account);
-            //f.Closed += (s, args) => this.Close();
-            //f.Show();
+            this.Hide();
+            FSaveList f = new FSaveList(account);
+            f.Closed += (s, args) => this.Close();
+            f.Show();
         }
 
         private void btnOrderAnalysis_Click(object sender, EventArgs e)
         {
-            //this.Hide();
-            //FOrderAnalysis f = new FOrderAnalysis(account);
-            //f.Closed += (s, args) => this.Close();
-            //f.Show();
+            this.Hide();
+            FOrderAnalysis f = new FOrderAnalysis(account);
+            f.Closed += (s, args) => this.Close();
+            f.Show();
         }
 
         private void btnInformation_Click(object sender, EventArgs e)
         {
-            //this.Hide();
-            //FInformation f = new FInformation(account);
-            //f.Closed += (s, args) => this.Close();
-            //f.Show();
+            this.Hide();
+            FInformation f = new FInformation(account);
+            f.Closed += (s, args) => this.Close();
+            f.Show();
         }
 
         private void btnMoney_Click(object sender, EventArgs e)
         {
-            //this.Hide();
-            //FMoney f = new FMoney(account);
-            //f.Closed += (s, args) => this.Close();
-            //f.Show();
+            this.Hide();
+            FMoney f = new FMoney(account);
+            f.Closed += (s, args) => this.Close();
+            f.Show();
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
@@ -197,96 +197,99 @@ namespace EntityProj.Forms
 
         private void FBuyDetail_Load(object sender, EventArgs e)
         {
-            //product.ViewCount++;
-            //productDAO.Update(product);
-            //lblProductName.Text = product.Name;
-            //lblSellPrice.Text = product.SalePrice.ToString("N0") + " VND";
-            //lblBuyPrice.Text = product.OriginalPrice.ToString("N0") + " VND";
-            //txtStatus.Text = product.Status.ToString();
-            //txtDescription.Text = product.Description.ToString();
-            //txtSupportPolicy.Text = product.SupportPolicy.ToString();
-            //txtFunctionalities.Text = product.Functionality.ToString();
-            //SetRichTextBoxHeight(txtStatus);
-            //panelStatus.Height = txtStatus.Height;
-            //SetRichTextBoxHeight(txtDescription);
-            //panelDescription.Height = txtDescription.Height;
-            //SetRichTextBoxHeight(txtFunctionalities);
-            //panelFunctionality.Height = txtFunctionalities.Height + 30;
-            //lblArea.Text = "Area: " + product.Area;
-            //lblOrigin.Text = "Origin: " + product.Origin;
-            //lblMaterial.Text = "Material: " + product.Material;
-            //lblSize.Text = "Size: " + product.Size;
-            //lblCondition.Text = "Condition: " + product.Condition + "%";
-            //lblBrand.Text = "Brand: " + product.Brand;
-            //lblCategory.Text = "Category: " + product.Category;
-            //lblType.Text = "Type: " + product.Type;
-            //lblCancelHour.Text = product.CancelLimit + " h";
-            //lblCancel.Text = product.CancelRefund ? "Get refunded for cancellations." : "No refund for cancellations.";
-            //lblPostingTime.Text = (product.PostedTime.Date == DateTime.Now.Date) ? ((DateTime.Now.Hour - product.PostedTime.Hour) + " hours ago"): product.PostedTime.ToString("dd-MM-yyyy");
-            //GetImageProduct();
+            product.ViewCount++;
+            productDAO.Update(product);
+            lblProductName.Text = product.Name;
+            lblSellPrice.Text = product.SalePrice.ToString("N0") + " VND";
+            lblBuyPrice.Text = product.OriginalPrice.ToString("N0") + " VND";
+            txtStatus.Text = product.Status.ToString();
+            txtDescription.Text = product.Description.ToString();
+            txtSupportPolicy.Text = product.SupportPolicy.ToString();
+            txtFunctionalities.Text = product.Functionality.ToString();
+            SetRichTextBoxHeight(txtStatus);
+            panelStatus.Height = txtStatus.Height;
+            SetRichTextBoxHeight(txtDescription);
+            panelDescription.Height = txtDescription.Height;
+            SetRichTextBoxHeight(txtFunctionalities);
+            panelFunctionality.Height = txtFunctionalities.Height + 30;
+            lblArea.Text = "Area: " + product.Area;
+            lblOrigin.Text = "Origin: " + product.Origin;
+            lblMaterial.Text = "Material: " + product.Material;
+            lblSize.Text = "Size: " + product.Size;
+            lblCondition.Text = "Condition: " + product.Condition + "%";
+            lblBrand.Text = "Brand: " + product.Brand;
+            lblCategory.Text = "Category: " + product.Category;
+            lblType.Text = "Type: " + product.Type;
+            lblCancelHour.Text = product.CancelLimit + " h";
+            lblCancel.Text = (bool)product.CancelRefund ? "Get refunded for cancellations." : "No refund for cancellations.";
+            lblPostingTime.Text = (product.PostedTime.Value.Date == DateTime.Now.Date) ? ((DateTime.Now.Hour - product.PostedTime.Value.Hour) + " hours ago") : product.PostedTime.Value.ToString("dd-MM-yyyy");
+            GetImageProduct();
 
-            ////check button save
-            //if (favoriteDAO.checkProductinFavorite(account.Id, product.Id))
-            //{
-            //    btnSave.Text = "Saved";
-            //    btnSave.FillColor = Color.WhiteSmoke;
-            //    btnSave.ForeColor = Color.Red;
-            //}
-            //else
-            //{
-            //    btnSave.Text = "Save";
-            //    btnSave.FillColor = Color.Red;
-            //    btnSave.ForeColor = Color.WhiteSmoke;
-            //}
-            ////check cart
-            //if (cartDAO.checkProductinCart(account.Id, product.Id))
-            //{
-            //    btnAddtoCart.Text = "Already in your cart";
-            //}
-            //else
-            //{
-            //    btnAddtoCart.Text = "Add to cart";
-            //}
-            ////check seller
-            //if (account.Id == product.SellerID)
-            //{
-            //    btnSave.Visible = false;
-            //    btnBuy.Visible = false;
-            //    btnAddtoCart.Visible = false;
-            //}
+            //check button save
+            if (favoriteDAO.checkProductinFavorite(account.Id, product.Id))
+            {
+                btnSave.Text = "Saved";
+                btnSave.FillColor = Color.WhiteSmoke;
+                btnSave.ForeColor = Color.Red;
+            }
+            else
+            {
+                btnSave.Text = "Save";
+                btnSave.FillColor = Color.Red;
+                btnSave.ForeColor = Color.WhiteSmoke;
+            }
+            //check cart
+            if (cartDAO.checkProductinCart(account.Id, product.Id))
+            {
+                btnAddtoCart.Text = "Already in your cart";
+            }
+            else
+            {
+                btnAddtoCart.Text = "Add to cart";
+            }
+            //check seller
+            if (account.Id == product.SellerID)
+            {
+                btnSave.Visible = false;
+                btnBuy.Visible = false;
+                btnAddtoCart.Visible = false;
+            }
 
-            //Account seller = new Account(product.SellerID);
-            //lblAvatarName.Text = seller.Name;
-            //ratingSeller.Value = seller.AvgRating;
+            Account seller = accountDAO.Retrieve(product.SellerID.Value);
 
-            //convertByte(pbAvatar, seller.Avatar);
-            //// menu
-            //lblMenuAccountName.Text = account.Name;
-            //ratingMenuAccount.Value = account.AvgRating;
-            //convertByte(pbMenuAvatar, account.Avatar);
 
-            ////relate products
-            //List<Product> relatedProducts = productDAO.LoadSimilarProducts(product.Id, product.Type);
-            //if(relatedProducts.Count>0)
-            //{
-            //    panelRelatedProducts.Visible = true;
-            //    lblRelatedProducts.Visible = true;
-            //    foreach (var pd in relatedProducts)
-            //    {
-            //        if (pd.BuyerID <= 0 && pd.OrderCondition <= (int)ordercondition.Displaying)
-            //        {
-            //            UCProduct uc = new UCProduct(pd, account);
-            //            uc.ProductDoubleClick += UCProduct_ProductDoubleClick;
-            //            flpRelatedProducts.Controls.Add(uc);
-            //        }
-            //    }
-            //    adjustRecommendFlowLayoutPanel();
-            //}
-            //else
-            //{
-            //    panelRelatedProducts.Visible = false;
-            //    lblRelatedProducts.Visible = false;
-            //}
+
+            lblAvatarName.Text = seller.Name;
+            ratingSeller.Value = seller.AvgRating;
+
+            convertByte(pbAvatar, seller.Avatar);
+            // menu
+            lblMenuAccountName.Text = account.Name;
+            ratingMenuAccount.Value = account.AvgRating;
+            convertByte(pbMenuAvatar, account.Avatar);
+
+            //relate products
+            List<Product> relatedProducts = productDAO.LoadSimilarProducts(product.Id, product.Type);
+            if (relatedProducts.Count > 0)
+            {
+                panelRelatedProducts.Visible = true;
+                lblRelatedProducts.Visible = true;
+                foreach (var pd in relatedProducts)
+                {
+                    if (pd.BuyerID <= 0 && pd.OrderCondition <= (int)ordercondition.Displaying)
+                    {
+                        UCProduct uc = new UCProduct(pd, account);
+                        uc.ProductDoubleClick += UCProduct_ProductDoubleClick;
+                        flpRelatedProducts.Controls.Add(uc);
+                    }
+                }
+                adjustRecommendFlowLayoutPanel();
+            }
+            else
+            {
+                panelRelatedProducts.Visible = false;
+                lblRelatedProducts.Visible = false;
+            }
 
         }
 
@@ -306,10 +309,9 @@ namespace EntityProj.Forms
             flpRelatedProducts.Width = totalWidth;
         }
 
-        /*
         private void GetImageProduct()
         {
-            DataTable ImageTable = imageDAO.GetImageProduct(product.Id);
+            DataTable ImageTable = (DataTable)imageDAO.GetImageProduct(product.Id);
             int pictureBoxIndex = 0;
             foreach (DataRow row in ImageTable.Rows)
             {
@@ -322,29 +324,34 @@ namespace EntityProj.Forms
                 MemoryStream ms = new MemoryStream(imageData);
 
                 // Assign pictureBox variable based on index
-                Guna2ImageButton pictureBox = null;
-
-                switch (pictureBoxIndex)
+                if (pictureBoxIndex == 0)
                 {
-
-                    case 0:
-                        pictureBox = btnImage1;
-                        break;
-                    case 1:
-                        pictureBox = btnImage2;
-                        break;
-                    case 2:
-                        pictureBox = btnImage3;
-                        break;
-                    case 3:
-                        pictureBox = btnImage4;
-                        break;
-
+                    // For the first image, assign to btnImage1
+                    btnImage1.Image = Image.FromStream(ms);
+                    btnImage1.Visible = true;
                 }
-
-                // Assign image to PictureBox and make it visible
-                pictureBox.Image = Image.FromStream(ms);
-                pictureBox.Visible = true;
+                else
+                {
+                    // For the rest of the images, assign to Guna2ImageButton controls
+                    Guna2PictureBox pictureBox = null;
+                    switch (pictureBoxIndex)
+                    {
+                        case 1:
+                            pictureBox = btnImage2;
+                            break;
+                        case 2:
+                            pictureBox = btnImage3;
+                            break;
+                        case 3:
+                            pictureBox = btnImage4;
+                            break;
+                    }
+                    if (pictureBox != null)
+                    {
+                        pictureBox.Image = Image.FromStream(ms);
+                        pictureBox.Visible = true;
+                    }
+                }
 
                 pictureBoxIndex++;
             }
@@ -368,74 +375,6 @@ namespace EntityProj.Forms
                 }
             }
         }
-        */
-
-        private void GetImageProduct()
-        {
-            //DataTable ImageTable = imageDAO.GetImageProduct(product.Id);
-            //int pictureBoxIndex = 0;
-            //foreach (DataRow row in ImageTable.Rows)
-            //{
-            //    if (pictureBoxIndex >= 4) // If we have more images than PictureBoxes
-            //        break;
-
-            //    byte[] imageData = (byte[])row["Image"]; // Access the "Image" column
-
-            //    // Load image into PictureBox
-            //    MemoryStream ms = new MemoryStream(imageData);
-
-            //    // Assign pictureBox variable based on index
-            //    if (pictureBoxIndex == 0)
-            //    {
-            //        // For the first image, assign to btnImage1
-            //        btnImage1.Image = Image.FromStream(ms);
-            //        btnImage1.Visible = true;
-            //    }
-            //    else
-            //    {
-            //        // For the rest of the images, assign to Guna2ImageButton controls
-            //        Guna2PictureBox pictureBox = null;
-            //        switch (pictureBoxIndex)
-            //        {
-            //            case 1:
-            //                pictureBox = btnImage2;
-            //                break;
-            //            case 2:
-            //                pictureBox = btnImage3;
-            //                break;
-            //            case 3:
-            //                pictureBox = btnImage4;
-            //                break;
-            //        }
-            //        if (pictureBox != null)
-            //        {
-            //            pictureBox.Image = Image.FromStream(ms);
-            //            pictureBox.Visible = true;
-            //        }
-            //    }
-
-            //    pictureBoxIndex++;
-            //}
-            //// Hide any remaining PictureBoxes
-            //for (int i = pictureBoxIndex; i < 4; i++)
-            //{
-            //    switch (i)
-            //    {
-            //        case 0:
-            //            btnImage1.Visible = false;
-            //            break;
-            //        case 1:
-            //            btnImage2.Visible = false;
-            //            break;
-            //        case 2:
-            //            btnImage3.Visible = false;
-            //            break;
-            //        case 3:
-            //            btnImage4.Visible = false;
-            //            break;
-            //    }
-            //}
-        }
 
 
 
@@ -447,172 +386,42 @@ namespace EntityProj.Forms
             f.Show();
         }
 
-        private void panelMiddle_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblOrigin_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblSize_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblProductName_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblPhone_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblSellPrice_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblCategory_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void guna2Separator2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label9_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblBuyPrice_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblCondition_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtFunctionalities_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtStatus_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblArea_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtDescription_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblMaterial_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblBrand_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblType_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void guna2Separator1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnBuy_Click(object sender, EventArgs e)
         {
-            //this.Hide();
-            //List<Product> products = new List<Product>
-            //    {
-            //        product
-            //    };
-            //FDelivery f = new FDelivery(account, products);
-            //f.Closed += (s, args) => this.Close();
-            //f.Show();
+            this.Hide();
+            List<Product> products = new List<Product>
+                {
+                    product
+                };
+            FDelivery f = new FDelivery(account, products);
+            f.Closed += (s, args) => this.Close();
+            f.Show();
         }
 
 
         // Event handler for UCProduct's ProductDoubleClick event
         private void UCProduct_ProductDoubleClick(object sender, EventArgs e)
         {
-            //// Hide the current form (FBuy)
-            //this.Hide();
-            //// Open the FBuyDetail form
-            //FBuyDetail fBuyDetail = new FBuyDetail((sender as UCProduct).Product, account);
-            //fBuyDetail.Closed += (s, args) => this.Close();
-            //fBuyDetail.Show();
+            // Hide the current form (FBuy)
+            this.Hide();
+            // Open the FBuyDetail form
+            FBuyDetail fBuyDetail = new FBuyDetail((sender as UCProduct).Product, account);
+            fBuyDetail.Closed += (s, args) => this.Close();
+            fBuyDetail.Show();
         }
 
         private void lblAvatarName_Click(object sender, EventArgs e)
         {
-            //FReview fReview = new FReview(account, product);
-            //fReview.Show();
+            FReview fReview = new FReview(account, product);
+            fReview.Show();
         }
 
         private void btnVoucher_Click(object sender, EventArgs e)
         {
-            //this.Hide();
-            //FVoucher f = new FVoucher(account);
-            //f.Closed += (s, args) => this.Close();
-            //f.Show();
+            this.Hide();
+            FVoucher f = new FVoucher(account);
+            f.Closed += (s, args) => this.Close();
+            f.Show();
         }
 
         private void btnImage2_Click(object sender, EventArgs e)

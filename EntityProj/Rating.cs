@@ -20,5 +20,6 @@ namespace EntityProj
         public string Comment { get; set; }
         public Nullable<double> Star { get; set; }
         public int RatingID { get; set; }
+
     }
 }

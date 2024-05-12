@@ -52,7 +52,7 @@ namespace EntityProj.Forms
             {
                 UCProductCart uc = new UCProductCart(p, acc);
                 uc.cbSelected.Visible = false;
-                subtotal += p.SalePrice;
+                subtotal += (double)p.SalePrice;
                 flpCartList.Controls.Add(uc);
             }
             total = subtotal;
