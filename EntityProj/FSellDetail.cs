@@ -326,15 +326,15 @@ namespace EntityProj.Forms
                     Description = txtDescription.Text,
                     CancelLimit = int.Parse(txtCancelTime.Text),
                     CancelRefund = cbCancel.Checked,
-                    SellerID = acc.ID
+                    SellerID = acc.ID,
+                    OrderCondition = (int)ordercondition.Displaying,
+                    PostedTime = DateTime.Now,
+
                 };
                 db.Products.Add(product);
                 db.SaveChanges();
                 if (!edit)
                 {
-                    product.PostedTime = DateTime.Now;
-                    productDAO.Add(product);
-                    //Add images to Productimages
                     product = productDAO.GetLastProduct();
                     addImage(product);
                 }
@@ -482,7 +482,8 @@ namespace EntityProj.Forms
 
         private void GetImageProduct()
         {
-            DataTable ImageTable = (DataTable)imageDAO.GetImageProduct(pd.ID);
+            List<ProductImage> productImages = imageDAO.GetImageProduct(pd.ID);
+            DataTable ImageTable = imageDAO.ConvertProductImagesToDataTable(productImages);
             int pictureBoxIndex = 0;
             foreach (DataRow row in ImageTable.Rows)
             {

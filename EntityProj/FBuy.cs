@@ -66,7 +66,7 @@ namespace EntityProj.Forms
             List<Product> products = productDAO.LoadList();
             foreach (var pd in products)
             {
-                if (pd.BuyerID <= 0 && pd.OrderCondition <= (int)ordercondition.Displaying)
+                if ((pd.BuyerID <= 0 || pd.BuyerID == null) && pd.OrderCondition <= (int)ordercondition.Displaying)
                 {
                     UCProduct uc = new UCProduct(pd, account);
                     uc.ProductDoubleClick += UCProduct_ProductDoubleClick;
@@ -350,6 +350,11 @@ namespace EntityProj.Forms
             FVoucher f = new FVoucher(account);
             f.Closed += (s, args) => this.Close();
             f.Show();
+        }
+
+        private void lblMenuAccountName_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

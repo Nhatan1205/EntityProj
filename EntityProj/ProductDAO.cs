@@ -49,6 +49,8 @@ namespace EntityProj
             using (var context = new Window_ProjectContext())
             {
                 context.Products.AddOrUpdate(pd);
+                context.SaveChanges();
+
             }
         }
 
@@ -57,6 +59,7 @@ namespace EntityProj
             using (var context = new Window_ProjectContext())
             {
                 context.Products.AddOrUpdate(product);
+                context.SaveChanges();
             }
         }
 
@@ -66,7 +69,7 @@ namespace EntityProj
             {
                 // Use LINQ to query products similar to the specified type and exclude the specified productId
                 var similarProducts = context.Products
-                    .Where(p => p.Type == type && p.ID != productId)
+                    .Where(p => SqlFunctions.PatIndex(type, p.Type) > 0 && p.ID != productId)
                     .ToList();
 
                 // Convert the list of Product entities to a list of Product objects

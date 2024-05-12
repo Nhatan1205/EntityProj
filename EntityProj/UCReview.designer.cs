@@ -31,12 +31,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCReview));
             this.panelBody = new Guna.UI2.WinForms.Guna2Panel();
             this.panelBorder = new Guna.UI2.WinForms.Guna2Panel();
-            this.ucProductConditionReduce = new EntityProj.Forms.UCProductCondition();
             this.rsStar = new Guna.UI2.WinForms.Guna2RatingStar();
             this.panelRating = new Bunifu.UI.WinForms.BunifuPanel();
             this.lblStar = new System.Windows.Forms.Label();
             this.lblNameSeller = new System.Windows.Forms.Label();
             this.pbAvtSeller = new Bunifu.UI.WinForms.BunifuPictureBox();
+            this.ucProductConditionReduce = new EntityProj.Forms.UCProductCondition();
+            this.ucProductConditionReduce2 = new EntityProj.Forms.UCProductCondition();
             this.panelBody.SuspendLayout();
             this.panelBorder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbAvtSeller)).BeginInit();
@@ -57,6 +58,7 @@
             this.panelBorder.BorderColor = System.Drawing.Color.Black;
             this.panelBorder.BorderRadius = 10;
             this.panelBorder.BorderThickness = 1;
+            this.panelBorder.Controls.Add(this.ucProductConditionReduce2);
             this.panelBorder.Controls.Add(this.rsStar);
             this.panelBorder.Controls.Add(this.panelRating);
             this.panelBorder.Controls.Add(this.lblStar);
@@ -67,15 +69,6 @@
             this.panelBorder.Name = "panelBorder";
             this.panelBorder.Size = new System.Drawing.Size(1468, 271);
             this.panelBorder.TabIndex = 0;
-            // 
-            // ucProductConditionReduce
-            // 
-            this.ucProductConditionReduce.BackColor = System.Drawing.Color.Gainsboro;
-            this.ucProductConditionReduce.Location = new System.Drawing.Point(14, 159);
-            this.ucProductConditionReduce.Margin = new System.Windows.Forms.Padding(2);
-            this.ucProductConditionReduce.Name = "ucProductConditionReduce";
-            this.ucProductConditionReduce.Size = new System.Drawing.Size(1441, 96);
-            this.ucProductConditionReduce.TabIndex = 13;
             // 
             // rsStar
             // 
@@ -99,6 +92,7 @@
             this.panelRating.ShowBorders = true;
             this.panelRating.Size = new System.Drawing.Size(1348, 45);
             this.panelRating.TabIndex = 11;
+            this.panelRating.Click += new System.EventHandler(this.panelRating_Click);
             // 
             // lblStar
             // 
@@ -136,6 +130,24 @@
             this.pbAvtSeller.TabStop = false;
             this.pbAvtSeller.Type = Bunifu.UI.WinForms.BunifuPictureBox.Types.Circle;
             // 
+            // ucProductConditionReduce
+            // 
+            this.ucProductConditionReduce.BackColor = System.Drawing.Color.Gainsboro;
+            this.ucProductConditionReduce.Location = new System.Drawing.Point(14, 159);
+            this.ucProductConditionReduce.Margin = new System.Windows.Forms.Padding(2);
+            this.ucProductConditionReduce.Name = "ucProductConditionReduce";
+            this.ucProductConditionReduce.Size = new System.Drawing.Size(1441, 96);
+            this.ucProductConditionReduce.TabIndex = 13;
+            // 
+            // ucProductConditionReduce2
+            // 
+            this.ucProductConditionReduce2.BackColor = System.Drawing.Color.Gainsboro;
+            this.ucProductConditionReduce2.Location = new System.Drawing.Point(26, 149);
+            this.ucProductConditionReduce2.Margin = new System.Windows.Forms.Padding(2);
+            this.ucProductConditionReduce2.Name = "ucProductConditionReduce2";
+            this.ucProductConditionReduce2.Size = new System.Drawing.Size(1408, 114);
+            this.ucProductConditionReduce2.TabIndex = 13;
+            // 
             // UCReview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -161,5 +173,6 @@
         private System.Windows.Forms.Label lblStar;
         private System.Windows.Forms.Label lblNameSeller;
         private Bunifu.UI.WinForms.BunifuPictureBox pbAvtSeller;
+        private UCProductCondition ucProductConditionReduce2;
     }
 }

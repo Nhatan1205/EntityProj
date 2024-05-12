@@ -45,6 +45,8 @@ namespace EntityProj.Forms
                         EndDay = dtEndDay.Value,
                     };
                     context.Vouchers.Add(voucher);
+                    context.SaveChanges();
+
                 }
 
                 MessageBox.Show("Operation was successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);

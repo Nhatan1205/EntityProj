@@ -313,14 +313,15 @@ namespace EntityProj.Forms
 
         private void GetImageProduct()
         {
-            DataTable ImageTable = (DataTable)imageDAO.GetImageProduct(product.ID);
+            List<ProductImage> productImages = imageDAO.GetImageProduct(product.ID);
+            DataTable ImageTable = imageDAO.ConvertProductImagesToDataTable(productImages);
             int pictureBoxIndex = 0;
             foreach (DataRow row in ImageTable.Rows)
             {
                 if (pictureBoxIndex >= 4) // If we have more images than PictureBoxes
                     break;
 
-                byte[] imageData = (byte[])row["Image"]; // Access the "Image" column
+                byte[] imageData = (byte[])row["ImageURL"]; // Access the "Image" column
 
                 // Load image into PictureBox
                 MemoryStream ms = new MemoryStream(imageData);

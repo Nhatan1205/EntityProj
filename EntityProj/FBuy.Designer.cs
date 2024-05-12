@@ -118,7 +118,6 @@
             this.btnCart.ForeColor = System.Drawing.Color.White;
             this.btnCart.HoverState.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(193)))), ((int)(((byte)(0)))));
             this.btnCart.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(50)))), ((int)(((byte)(132)))));
-            
             this.btnCart.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnCart.ImageOffset = new System.Drawing.Point(4, 0);
             this.btnCart.ImageSize = new System.Drawing.Size(30, 30);
@@ -146,7 +145,6 @@
             this.btnMenu.ForeColor = System.Drawing.Color.White;
             this.btnMenu.HoverState.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(193)))), ((int)(((byte)(0)))));
             this.btnMenu.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(50)))), ((int)(((byte)(132)))));
- 
             this.btnMenu.ImageAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.btnMenu.ImageOffset = new System.Drawing.Point(4, 0);
             this.btnMenu.ImageSize = new System.Drawing.Size(35, 35);
@@ -192,7 +190,6 @@
             // 
             this.pbLogo.Dock = System.Windows.Forms.DockStyle.Left;
             this.pbLogo.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(50)))), ((int)(((byte)(132)))));
-           
             this.pbLogo.ImageRotate = 0F;
             this.pbLogo.Location = new System.Drawing.Point(0, 0);
             this.pbLogo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -640,7 +637,6 @@
             this.btnLogout.FillColor = System.Drawing.Color.White;
             this.btnLogout.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnLogout.ForeColor = System.Drawing.Color.Black;
-           
             this.btnLogout.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnLogout.ImageOffset = new System.Drawing.Point(5, 0);
             this.btnLogout.ImageSize = new System.Drawing.Size(34, 34);
@@ -677,7 +673,6 @@
             this.btnVoucher.ForeColor = System.Drawing.Color.Black;
             this.btnVoucher.HoverState.CustomBorderColor = System.Drawing.Color.Transparent;
             this.btnVoucher.HoverState.FillColor = System.Drawing.Color.LightGray;
-            
             this.btnVoucher.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnVoucher.ImageOffset = new System.Drawing.Point(5, 0);
             this.btnVoucher.ImageSize = new System.Drawing.Size(34, 34);
@@ -702,7 +697,6 @@
             this.btnMoney.FillColor = System.Drawing.Color.White;
             this.btnMoney.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnMoney.ForeColor = System.Drawing.Color.Black;
-           
             this.btnMoney.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnMoney.ImageOffset = new System.Drawing.Point(5, 0);
             this.btnMoney.ImageSize = new System.Drawing.Size(34, 34);
@@ -726,7 +720,6 @@
             this.btnInformation.FillColor = System.Drawing.Color.White;
             this.btnInformation.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnInformation.ForeColor = System.Drawing.Color.Black;
-           
             this.btnInformation.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnInformation.ImageOffset = new System.Drawing.Point(5, 0);
             this.btnInformation.ImageSize = new System.Drawing.Size(34, 34);
@@ -750,7 +743,6 @@
             this.btnOrderAnalysis.FillColor = System.Drawing.Color.White;
             this.btnOrderAnalysis.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnOrderAnalysis.ForeColor = System.Drawing.Color.Black;
-            
             this.btnOrderAnalysis.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnOrderAnalysis.ImageOffset = new System.Drawing.Point(5, 0);
             this.btnOrderAnalysis.ImageSize = new System.Drawing.Size(34, 34);
@@ -774,7 +766,6 @@
             this.btnSavedProducts.FillColor = System.Drawing.Color.White;
             this.btnSavedProducts.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnSavedProducts.ForeColor = System.Drawing.Color.Black;
-            
             this.btnSavedProducts.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnSavedProducts.ImageOffset = new System.Drawing.Point(5, 0);
             this.btnSavedProducts.ImageSize = new System.Drawing.Size(34, 34);
@@ -820,7 +811,6 @@
             this.btnSalesOrder.FillColor = System.Drawing.Color.White;
             this.btnSalesOrder.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnSalesOrder.ForeColor = System.Drawing.Color.Black;
-            
             this.btnSalesOrder.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnSalesOrder.ImageOffset = new System.Drawing.Point(5, 0);
             this.btnSalesOrder.ImageSize = new System.Drawing.Size(35, 35);
@@ -845,7 +835,6 @@
             this.btnPurchasesOrder.FillColor = System.Drawing.Color.White;
             this.btnPurchasesOrder.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnPurchasesOrder.ForeColor = System.Drawing.Color.Black;
-            
             this.btnPurchasesOrder.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnPurchasesOrder.ImageOffset = new System.Drawing.Point(3, 0);
             this.btnPurchasesOrder.ImageSize = new System.Drawing.Size(34, 34);
@@ -903,11 +892,11 @@
             this.lblMenuAccountName.Size = new System.Drawing.Size(156, 30);
             this.lblMenuAccountName.TabIndex = 3;
             this.lblMenuAccountName.Text = "Account name";
+            this.lblMenuAccountName.Click += new System.EventHandler(this.lblMenuAccountName_Click);
             // 
             // pbMenuAvatar
             // 
             this.pbMenuAvatar.Dock = System.Windows.Forms.DockStyle.Left;
-            
             this.pbMenuAvatar.ImageRotate = 0F;
             this.pbMenuAvatar.Location = new System.Drawing.Point(0, 0);
             this.pbMenuAvatar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);

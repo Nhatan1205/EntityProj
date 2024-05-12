@@ -9,6 +9,31 @@ namespace EntityProj
 {
     internal class RatingDAO
     {
+        public void Add(Rating rt, Product pd)
+        {
+            using (var context = new Window_ProjectContext())
+            {
+                // Attach the Product entity to the context if it's not already tracked
+                if (!context.Products.Local.Any(p => p.ID == pd.ID))
+                {
+                    context.Products.Attach(pd);
+                }
+
+                // Create a new Rating entity and set its properties
+                var newRating = new Rating
+                {
+                    Comment = rt.Comment,
+                    Star = rt.Star,
+                    SellerID = pd.SellerID.Value,
+                    ProductID = pd.ID,
+                    BuyerID = pd.BuyerID
+                };
+
+                // Add the new Rating entity to the context and save changes to the database
+                context.Ratings.Add(newRating);
+                context.SaveChanges();
+            }
+        }
         public DataTable Load(Account acc)
         {
             DataTable dataTable = new DataTable();

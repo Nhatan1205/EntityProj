@@ -98,7 +98,7 @@ namespace EntityProj.Forms
             }
             else
             {
-                //ratingDAO.Add(rt, product);
+                ratingDAO.Add(rt, product);
             }
             ClearData();
             

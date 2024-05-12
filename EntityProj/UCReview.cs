@@ -72,12 +72,12 @@ namespace EntityProj.Forms
             rsStar.Value = (float)rating.Star;
             rsStar.ReadOnly = true;
             // edit UCProductCondition with minimalism
-            ucProductConditionReduce.lblStatus.Visible = false;
-            ucProductConditionReduce.lblPrice.Visible = false;
-            ucProductConditionReduce.btnNextState.Visible = false;
+            ucProductConditionReduce2.lblStatus.Visible = false;
+            ucProductConditionReduce2.lblPrice.Visible = false;
+            ucProductConditionReduce2.btnNextState.Visible = false;
             convertByte(ucProductConditionReduce.pictureBox1, imageDAO.GetImageProductData(rating.ProductID));
-            ucProductConditionReduce.lblBuyerName.Text = product.SalePrice.ToString();
-            ucProductConditionReduce.lblProductName.Text = product.Name;
+            ucProductConditionReduce2.lblBuyerName.Text = product.SalePrice.ToString();
+            ucProductConditionReduce2.lblProductName.Text = product.Name;
         }
         private void GenerateLabel(Panel panel, string labelText, int labelCount)
         {
@@ -99,6 +99,11 @@ namespace EntityProj.Forms
         }
 
         private void gbContent_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panelRating_Click(object sender, EventArgs e)
         {
 
         }

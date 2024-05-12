@@ -51,8 +51,10 @@ namespace EntityProj
             using (var context = new Window_ProjectContext())
             {
                 context.Accounts.AddOrUpdate(account);
+                context.SaveChanges();
             }
             AddOrUpdateAvatar(account, account.Avatar);
+
         }
 
         public void AddOrUpdateAvatar(Account account, byte[] imgData)
