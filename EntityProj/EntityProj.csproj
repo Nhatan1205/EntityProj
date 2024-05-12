@@ -176,6 +176,12 @@
     <Compile Include="Cart.cs">
       <DependentUpon>ProjectModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="FAddVoucher.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FAddVoucher.designer.cs">
+      <DependentUpon>FAddVoucher.cs</DependentUpon>
+    </Compile>
     <Compile Include="Favorite.cs">
       <DependentUpon>ProjectModel.tt</DependentUpon>
     </Compile>
@@ -191,11 +197,83 @@
     <Compile Include="FBuyDetail.Designer.cs">
       <DependentUpon>FBuyDetail.cs</DependentUpon>
     </Compile>
+    <Compile Include="FCancelInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FCancelInfo.designer.cs">
+      <DependentUpon>FCancelInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FCart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FCart.designer.cs">
+      <DependentUpon>FCart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FDelivery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FDelivery.designer.cs">
+      <DependentUpon>FDelivery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FInformation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FInformation.designer.cs">
+      <DependentUpon>FInformation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FListSell.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FListSell.designer.cs">
+      <DependentUpon>FListSell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FMoney.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FMoney.designer.cs">
+      <DependentUpon>FMoney.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FOrderAnalysis.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FOrderAnalysis.designer.cs">
+      <DependentUpon>FOrderAnalysis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FProductManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FProductManagement.designer.cs">
+      <DependentUpon>FProductManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="FRating.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FRating.Designer.cs">
       <DependentUpon>FRating.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FReview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FReview.designer.cs">
+      <DependentUpon>FReview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FSaveList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FSaveList.designer.cs">
+      <DependentUpon>FSaveList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FSellDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FSellDetail.designer.cs">
+      <DependentUpon>FSellDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FShipping.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FShipping.designer.cs">
+      <DependentUpon>FShipping.cs</DependentUpon>
     </Compile>
     <Compile Include="FSignin.cs">
       <SubType>Form</SubType>
@@ -208,6 +286,18 @@
     </Compile>
     <Compile Include="FSignup.Designer.cs">
       <DependentUpon>FSignup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FTrackOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FTrackOrder.designer.cs">
+      <DependentUpon>FTrackOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FVoucher.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FVoucher.designer.cs">
+      <DependentUpon>FVoucher.cs</DependentUpon>
     </Compile>
     <Compile Include="Product.cs">
       <DependentUpon>ProjectModel.tt</DependentUpon>
@@ -242,23 +332,116 @@
     <Compile Include="ShippingInfo.cs">
       <DependentUpon>ProjectModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="UCApplyVoucher.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCApplyVoucher.designer.cs">
+      <DependentUpon>UCApplyVoucher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCProduct.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCProduct.designer.cs">
+      <DependentUpon>UCProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCProductBuy.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCProductBuy.designer.cs">
+      <DependentUpon>UCProductBuy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCProductCancel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCProductCancel.designer.cs">
+      <DependentUpon>UCProductCancel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCProductCart.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCProductCart.designer.cs">
+      <DependentUpon>UCProductCart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCProductCondition.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCProductCondition.designer.cs">
+      <DependentUpon>UCProductCondition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCProductSell.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCProductSell.designer.cs">
+      <DependentUpon>UCProductSell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCReview.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCReview.designer.cs">
+      <DependentUpon>UCReview.cs</DependentUpon>
+    </Compile>
     <Compile Include="Voucher.cs">
       <DependentUpon>ProjectModel.tt</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="FAddVoucher.resx">
+      <DependentUpon>FAddVoucher.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FBuy.resx">
       <DependentUpon>FBuy.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FBuyDetail.resx">
       <DependentUpon>FBuyDetail.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FCancelInfo.resx">
+      <DependentUpon>FCancelInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FCart.resx">
+      <DependentUpon>FCart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FDelivery.resx">
+      <DependentUpon>FDelivery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FInformation.resx">
+      <DependentUpon>FInformation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FListSell.resx">
+      <DependentUpon>FListSell.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FMoney.resx">
+      <DependentUpon>FMoney.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FOrderAnalysis.resx">
+      <DependentUpon>FOrderAnalysis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FProductManagement.resx">
+      <DependentUpon>FProductManagement.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FRating.resx">
       <DependentUpon>FRating.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FReview.resx">
+      <DependentUpon>FReview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FSaveList.resx">
+      <DependentUpon>FSaveList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FSellDetail.resx">
+      <DependentUpon>FSellDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FShipping.resx">
+      <DependentUpon>FShipping.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FSignin.resx">
       <DependentUpon>FSignin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FSignup.resx">
       <DependentUpon>FSignup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FTrackOrder.resx">
+      <DependentUpon>FTrackOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FVoucher.resx">
+      <DependentUpon>FVoucher.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -270,6 +453,30 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UCApplyVoucher.resx">
+      <DependentUpon>UCApplyVoucher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCProduct.resx">
+      <DependentUpon>UCProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCProductBuy.resx">
+      <DependentUpon>UCProductBuy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCProductCancel.resx">
+      <DependentUpon>UCProductCancel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCProductCart.resx">
+      <DependentUpon>UCProductCart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCProductCondition.resx">
+      <DependentUpon>UCProductCondition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCProductSell.resx">
+      <DependentUpon>UCProductSell.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCReview.resx">
+      <DependentUpon>UCReview.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <EntityDeploy Include="ProjectModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

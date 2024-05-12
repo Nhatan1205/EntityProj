@@ -44,72 +44,72 @@ namespace EntityProj.Forms
         private void FBuy_Load(object sender, EventArgs e)
         {
             //delete all user controls
-            //for (int i = flpProduct.Controls.Count - 1; i >= 0; i--)
-            //{
-            //    Control control = flpProduct.Controls[i];
-            //    if (control is UCProduct)  
-            //    {
-            //        flpRecommendProducts.Controls.Remove(control);
-            //        control.Dispose();  
-            //    }
-            //}
-            //for (int i = flpRecommendProducts.Controls.Count - 1; i >= 0; i--)
-            //{
-            //    Control control = flpRecommendProducts.Controls[i];
-            //    if (control is UCProduct)  
-            //    {
-            //        flpRecommendProducts.Controls.Remove(control);
-            //        control.Dispose(); 
-            //    }
-            //}
-            ////add product list
-            //List<Product> products = productDAO.LoadList();
-            //foreach (var pd in products)
-            //{
-            //    if (pd.BuyerID <= 0 && pd.OrderCondition <= (int)ordercondition.Displaying)
-            //    {
-            //        UCProduct uc = new UCProduct(pd, account);
-            //        uc.ProductDoubleClick += UCProduct_ProductDoubleClick;
-            //        flpProduct.Controls.Add(uc);
-            //    }
-            //}
-            //lblMenuAccountName.Text = account.Name;
-            //ratingMenuAccount.Value = account.AvgRating;
-            //lblProducts.Text = "All products";
-            //convertByte(pbMenuAvatar, account.Avatar);
-            ////add recommend list
-            //List<string> types = recommendDAO.GetTopThreeRecommendedTypesByBuyerID(account.Id);
-            //List<Product> recommendedProducts = new List<Product>();
-            //foreach (string type in types)
-            //{
-            //    List<Product> productsByType = productDAO.LoadRecommendList(type);
-            //    // Add the top 3 products for this type to the recommended products list
-            //    recommendedProducts.AddRange(productsByType); 
-            //}
+            for (int i = flpProduct.Controls.Count - 1; i >= 0; i--)
+            {
+                Control control = flpProduct.Controls[i];
+                if (control is UCProduct)
+                {
+                    flpRecommendProducts.Controls.Remove(control);
+                    control.Dispose();
+                }
+            }
+            for (int i = flpRecommendProducts.Controls.Count - 1; i >= 0; i--)
+            {
+                Control control = flpRecommendProducts.Controls[i];
+                if (control is UCProduct)
+                {
+                    flpRecommendProducts.Controls.Remove(control);
+                    control.Dispose();
+                }
+            }
+            //add product list
+            List<Product> products = productDAO.LoadList();
+            foreach (var pd in products)
+            {
+                if (pd.BuyerID <= 0 && pd.OrderCondition <= (int)ordercondition.Displaying)
+                {
+                    UCProduct uc = new UCProduct(pd, account);
+                    uc.ProductDoubleClick += UCProduct_ProductDoubleClick;
+                    flpProduct.Controls.Add(uc);
+                }
+            }
+            lblMenuAccountName.Text = account.Name;
+            ratingMenuAccount.Value = account.AvgRating;
+            lblProducts.Text = "All products";
+            convertByte(pbMenuAvatar, account.Avatar);
+            //add recommend list
+            List<string> types = recommendDAO.GetTopThreeRecommendedTypesByBuyerID(account.Id);
+            List<Product> recommendedProducts = new List<Product>();
+            foreach (string type in types)
+            {
+                List<Product> productsByType = productDAO.LoadRecommendList(type);
+                // Add the top 3 products for this type to the recommended products list
+                recommendedProducts.AddRange(productsByType);
+            }
 
 
-            //foreach (var pd in recommendedProducts)
-            //{
-            //    if (pd.BuyerID <= 0 && pd.OrderCondition <= (int)ordercondition.Displaying)
-            //    {
-            //        UCProduct uc = new UCProduct(pd, account);
-            //        uc.ProductDoubleClick += UCProduct_ProductDoubleClick;
-            //        flpRecommendProducts.Controls.Add(uc);
-            //    }
-            //}
-            //if (flpRecommendProducts.Controls.Count <= 0)
-            //{
-            //    flpRecommendProducts.Visible = false;
-            //    panelRecommendProducts.Visible = false;
-            //    panelRecommend.Visible = false;
-            //}
-            //else
-            //{
-            //    flpRecommendProducts.Visible = true;
-            //    panelRecommendProducts.Visible = true;
-            //    panelRecommend.Visible = true;
-            //    adjustRecommendFlowLayoutPanel();
-            //}
+            foreach (var pd in recommendedProducts)
+            {
+                if (pd.BuyerID <= 0 && pd.OrderCondition <= (int)ordercondition.Displaying)
+                {
+                    UCProduct uc = new UCProduct(pd, account);
+                    uc.ProductDoubleClick += UCProduct_ProductDoubleClick;
+                    flpRecommendProducts.Controls.Add(uc);
+                }
+            }
+            if (flpRecommendProducts.Controls.Count <= 0)
+            {
+                flpRecommendProducts.Visible = false;
+                panelRecommendProducts.Visible = false;
+                panelRecommend.Visible = false;
+            }
+            else
+            {
+                flpRecommendProducts.Visible = true;
+                panelRecommendProducts.Visible = true;
+                panelRecommend.Visible = true;
+                adjustRecommendFlowLayoutPanel();
+            }
         }
 
         // Event handler for UCProduct's ProductDoubleClick event

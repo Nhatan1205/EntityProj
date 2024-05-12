@@ -55,6 +55,7 @@ namespace EntityProj.Forms
                     }
                     else
                     {
+                        MessageBox.Show("Correct Password");
                         //this.Hide();
                         //FBuy f = new FBuy(acc);
                         //f.Closed += (s, args) => this.Close();
