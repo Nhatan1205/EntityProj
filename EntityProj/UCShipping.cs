@@ -25,7 +25,7 @@ namespace EntityProj.Forms
 
         }
 
-        public UCShipping(Shipping ship)
+        public UCShipping(ShippingInfo ship)
         {
             InitializeComponent();
             SetEventForAllControls(this);
@@ -34,6 +34,8 @@ namespace EntityProj.Forms
             lblAddress.Text = shipping.Address.ToString();
             lblPhoneNo.Text = shipping.PhoneNo.ToString();
         }
+
+        
 
         private void SetEventForAllControls(Control parent)
         {

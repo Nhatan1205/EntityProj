@@ -33,7 +33,7 @@ namespace EntityProj.Forms
 
         private void FListSell_Load(object sender, EventArgs e)
         {
-            List<Product> products = productDAO.LoadListWithCondition("", acc.Id);
+            List<Product> products = productDAO.LoadListWithCondition("", acc.ID);
             foreach (var pd in products)
             {
                 UCProductSell uc = new UCProductSell(pd, acc);
@@ -69,7 +69,7 @@ namespace EntityProj.Forms
         private void btnLoad_Click(object sender, EventArgs e)
         {
             flpProduct.Controls.Clear();
-            List<Product> products = productDAO.LoadListWithCondition(txtSearch.Text, acc.Id);
+            List<Product> products = productDAO.LoadListWithCondition(txtSearch.Text, acc.ID);
             foreach (var pd in products)
             {
                 UCProductSell uc = new UCProductSell(pd, acc);

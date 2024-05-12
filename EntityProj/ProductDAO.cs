@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity.Migrations;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -93,6 +95,58 @@ namespace EntityProj
                 {
                     throw new ArgumentException($"Product with ID {product.Id} not found.");
                 }
+            }
+        }
+
+        public List<Product> LoadListWithCondition(string name, int sellerId)
+        {
+            using (var context = new Window_ProjectContext())
+            {
+                IQueryable<Product> query = context.Products.Where(p => p.SellerID == sellerId);
+
+                if (!string.IsNullOrEmpty(name))
+                {
+                    query = query.Where(p => p.Name.Contains(name));
+                }
+
+                return query.ToList();
+            }
+        }
+
+        public DataTable LoadRegularCustomer(int sellerId, DateTime start, DateTime end)
+        {
+            using (var context = new Window_ProjectContext())
+            {
+                // Query completed orders within the specified date range
+                var completedOrders = context.Orders
+                    .Where(o => o.SellerID == sellerId && o.OrderDate >= start && o.OrderDate <= end && o.Status == "Completed")
+                    .ToList();
+
+                // Aggregate regular customer data
+                var regularCustomers = completedOrders
+                    .GroupBy(o => o.BuyerID)
+                    .Select(g => new RegularCustomer
+                    {
+                        BuyerID = g.Key,
+                        Name = g.First().Buyer.Name, // Assuming Buyer is a navigation property in Order referencing the Account table
+                        Times = g.Count(),
+                        TotalPurchase = g.Sum(o => o.TotalPrice)
+                    })
+                    .ToList();
+
+                // Create DataTable to hold the aggregated data
+                DataTable dt = new DataTable();
+                dt.Columns.Add("Name", typeof(string));
+                dt.Columns.Add("Number of Product Purchases", typeof(int));
+                dt.Columns.Add("Total Purchases", typeof(string));
+
+                // Populate DataTable with aggregated data
+                foreach (var customer in regularCustomers)
+                {
+                    dt.Rows.Add(customer.Name, customer.Times, $"{customer.TotalPurchase:N0} VND");
+                }
+
+                return dt;
             }
         }
     }

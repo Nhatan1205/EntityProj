@@ -69,12 +69,12 @@ namespace EntityProj.Forms
             lblPrice.Text = total.ToString("N0") + " VND";
             lblNoOfItems.Text = products.Count.ToString();
             //
-            Shipping shipping = shippingDAO.GetShipping(acc.SelectedShipping);
+            ShippingInfo shipping = shippingDAO.GetShipping(acc.selectedShippingID.Value);
             if (shipping != null)
             {
                 txtAddress.Text = shipping.Address;
                 txtRecipientName.Text = shipping.RecipientName;
-                txtPhone.Text = shipping.PhoneNo;
+                txtPhone.Text = shipping.PhoneNumber;
             }
             else
             {
@@ -240,7 +240,7 @@ namespace EntityProj.Forms
             {
                 MessageBox.Show("Payment Method has not been chosen", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else if(acc.SelectedShipping == 0)
+            else if(acc.selectedShippingID == 0)
             {
                 MessageBox.Show("Shipping Method has not been chosen", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -255,34 +255,34 @@ namespace EntityProj.Forms
                     foreach (Product product in products)
                     {
                         // Update Buyer money
-                        Account buyer = new Account(acc.Id);
+                        Account buyer = accountDAO.Retrieve(acc.ID);
                         // Check pay method (is it online or not)
                         if (payMethod == 1)
                         {
-                            buyer.Money -= total;
-                            accountDAO.update(buyer);
+                            buyer.Money -= (float)total;
+                            accountDAO.Update(buyer);
                             product.PayMethod = true;
                         } else
                         {
                             product.PayMethod = false;
                         }
                         //  Update Seller money
-                        Account seller = new Account(product.SellerID);
-                        seller.Money += product.SalePrice;
-                        accountDAO.update(seller);
+                        Account seller = accountDAO.Retrieve(product.SellerID.Value);
+                        seller.Money += (float)product.SalePrice;
+                        accountDAO.Update(seller);
                         // Update product
-                        Shipping shipping = shippingDAO.GetShipping(acc.SelectedShipping);
-                        product.SelectedShipping = acc.SelectedShipping;
+                        ShippingInfo shipping = shippingDAO.GetShipping(acc.selectedShippingID.Value);
+                        product.selectedShippingID = acc.selectedShippingID.Value;
                         // Proceed with the purchase
-                        if (favoriteDAO.checkProductinFavorite(acc.Id, product.Id))
+                        if (favoriteDAO.checkProductinFavorite(acc.ID, product.ID))
                         {
-                            favoriteDAO.delete(acc.Id, product.Id);
+                            favoriteDAO.delete(acc.ID, product.ID);
                         } 
-                        if (cartDAO.checkProductinCart(acc.Id, product.Id))
+                        if (cartDAO.checkProductinCart(acc.ID, product.ID))
                         {
-                            cartDAO.delete(acc.Id, product.Id);
+                            cartDAO.delete(acc.ID, product.ID);
                         }
-                        product.BuyerID = acc.Id;
+                        product.BuyerID = acc.ID;
                         product.OrderCondition = (int)ordercondition.WaitforConfirmation;
                         productDAO.Update(product);
                     }
@@ -303,10 +303,10 @@ namespace EntityProj.Forms
                 lblEdit.Text = "Save";
                 lblPackage.Text = "List of your address";
                 flpCartList.Controls.Clear();
-                List<Shipping> shippings = shippingDAO.LoadList();
+                List<ShippingInfo> shippings = shippingDAO.LoadList();
                 foreach (var ship in shippings)
                 {
-                    if (acc.Id == ship.AccountId)
+                    if (acc.ID == ship.AccountID)
                     {
                         UCShipping uc = new UCShipping(ship);
                         uc.SelectedChanged += UC_ShippingSelectedChanged;
@@ -328,8 +328,8 @@ namespace EntityProj.Forms
             // Cast the sender object back to UCShipping to access its properties
             UCShipping selectedUC = sender as UCShipping;
             selectedUC.panelBorder.BorderColor = Color.Black;
-            acc.SelectedShipping = selectedUC.Shipping.Id;
-            accountDAO.update(acc);
+            acc.selectedShippingID = selectedUC.Shipping.Id;
+            accountDAO.Update(acc);
 
             // Iterate through each UCShipping control in the flow layout panel
             foreach (UCShipping uc in flpCartList.Controls)
@@ -350,11 +350,11 @@ namespace EntityProj.Forms
                 btnApplyVoucher.Text = "CLOSE";
                 lblPackage.Text = "All available vouchers";
                 flpCartList.Controls.Clear();
-                List<int> Voucherids = voucherDAO.GetVoucherIDsByBuyerID(acc.Id);
+                List<int> Voucherids = voucherDAO.GetVoucherIDsByBuyerID(acc.ID);
                 foreach (var voucherID in Voucherids)
                 {
                     Voucher voucher = voucherDAO.GetVoucher(voucherID);
-                    if(voucher.Beginday <= DateTime.Now && DateTime.Now <= voucher.Endday)
+                    if(voucher.BeginDay <= DateTime.Now && DateTime.Now <= voucher.EndDay)
                     {
                         UCApplyVoucher uc = new UCApplyVoucher(voucher, acc);
                         uc.SelectedChanged += UC_ApplyVoucherSelectedChanged;
@@ -381,7 +381,7 @@ namespace EntityProj.Forms
             // Cast the sender object back to UCShipping to access its properties
             UCApplyVoucher selectedUC = sender as UCApplyVoucher;
             selectedUC.panelBorder.BorderColor = Color.Black;
-            voucherValue = selectedUC.Voucher.Value;
+            voucherValue = (double)selectedUC.Voucher.Value;
             total = 0;
             total = subtotal < voucherValue ? 0 : subtotal - voucherValue;
             lblVoucherValue.Text = "-"+ voucherValue.ToString("N0") + " VND";

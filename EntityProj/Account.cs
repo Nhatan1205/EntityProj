@@ -14,7 +14,7 @@ namespace EntityProj
     
     public partial class Account
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public string Name { get; set; }
@@ -25,11 +25,8 @@ namespace EntityProj
         public Nullable<float> Money { get; set; }
         public Nullable<int> selectedShippingID { get; set; }
 
-        private float avgRating;
         private List<Rating> ratingList = new List<Rating>();
-
-        public float AvgRating { get => avgRating; set => avgRating = value; }
-        public List<Rating> RatingList { get => ratingList; set => ratingList = value; }
+        private float avgRating;
 
         public float AverageStar()
         {
@@ -47,5 +44,7 @@ namespace EntityProj
             }
             return 0;
         }
+        public float AvgRating { get => avgRating; set => avgRating = value; }
+        public List<Rating> RatingList { get => ratingList; set => ratingList = value; }
     }
 }

@@ -37,7 +37,7 @@ namespace EntityProj.Forms
             txtPhone.Text = account.Phone;
             if (account.Birthday != DateTime.MinValue)
             {
-                dtpBirthday.Value = account.Birthday.Date;
+                dtpBirthday.Value = account.Birthday.Value.Date;
             }
             else
             {
@@ -225,7 +225,7 @@ namespace EntityProj.Forms
             account.Address = txtAddress.Text;
             account.Avatar = avatarByteArray;
 
-            accountDAO.update(account);
+            accountDAO.Update(account);
         }
 
         private void btnClose_Click(object sender, EventArgs e)

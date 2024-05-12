@@ -29,7 +29,7 @@ namespace EntityProj.Forms
         {
             InitializeComponent();
             containerMenu.Visible = false;
-            this.acc = accountDAO.Retrieve(acc.Id);
+            this.acc = accountDAO.Retrieve(acc.ID);
         }
 
         private void btnRecharge_Click(object sender, EventArgs e)
@@ -48,8 +48,8 @@ namespace EntityProj.Forms
                 MessageBox.Show("Wrong Password");
             } 
             else {
-                acc.Money += money;
-                accountDAO.update(acc);
+                acc.Money += (float)money;
+                accountDAO.Update(acc);
                 MessageBox.Show("Recharge Sucessfull");
             }
             txtPassword.Text = "";
@@ -78,8 +78,8 @@ namespace EntityProj.Forms
             }
             else
             {
-                acc.Money -= money;
-                accountDAO.update(acc);
+                acc.Money -= (float)money;
+                accountDAO.Update(acc);
                 MessageBox.Show("Withdraw Sucessfull");
             }
             txtPassword.Text = "";
@@ -90,7 +90,7 @@ namespace EntityProj.Forms
         private void FMoney_Load(object sender, EventArgs e)
         {
 
-            lblTotalMoney.Text = (acc.Money > 0) ? acc.Money.ToString("N0") + " VND" : "N/A";
+            lblTotalMoney.Text = (acc.Money > 0) ? acc.Money.Value.ToString("N0") + " VND" : "N/A";
             lblName.Text = acc.Name;
             if (acc.Avatar != null && acc.Avatar.Length > 0)
             {

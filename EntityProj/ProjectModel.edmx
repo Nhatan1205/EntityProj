@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Window_ProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Window_ProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="ID" />
@@ -89,22 +89,20 @@
           <Property Name="Image" Type="image" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Window_Project_01.dbo.Rating' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'WindowFinalProject23.dbo.Rating' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Rating">
           <Key>
             <PropertyRef Name="SellerID" />
             <PropertyRef Name="ProductID" />
-            <PropertyRef Name="RatingID" />
           </Key>
           <Property Name="SellerID" Type="int" Nullable="false" />
           <Property Name="ProductID" Type="int" Nullable="false" />
           <Property Name="BuyerID" Type="int" />
           <Property Name="Comment" Type="varchar" MaxLength="255" />
           <Property Name="Star" Type="float" />
-          <Property Name="RatingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Window_Project_01.dbo.Recommend' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'WindowFinalProject23.dbo.Recommend' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Recommend">
           <Key>
             <PropertyRef Name="BuyerID" />
@@ -136,12 +134,14 @@ warning 6002: The table/view 'Window_Project_01.dbo.Recommend' does not have a p
           <Property Name="BeginDay" Type="datetime" />
           <Property Name="EndDay" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'Window_Project_01.dbo.Voucher_Account' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="Voucher_Account">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
           <Property Name="VoucherID" Type="int" />
           <Property Name="BuyerID" Type="int" />
-        </EntityType>-->
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="Window_ProjectModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cancel_Info" EntityType="Self.Cancel_Info" Schema="dbo" store:Type="Tables" />
@@ -151,14 +151,14 @@ warning 6013: The table/view 'Window_Project_01.dbo.Voucher_Account' does not ha
           <EntitySet Name="ProductImages" EntityType="Self.ProductImages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShippingInfo" EntityType="Self.ShippingInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Voucher" EntityType="Self.Voucher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Voucher_Account" EntityType="Self.Voucher_Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rating" EntityType="Self.Rating" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Rating].[SellerID] AS [SellerID], 
     [Rating].[ProductID] AS [ProductID], 
     [Rating].[BuyerID] AS [BuyerID], 
     [Rating].[Comment] AS [Comment], 
-    [Rating].[Star] AS [Star], 
-    [Rating].[RatingID] AS [RatingID]
+    [Rating].[Star] AS [Star]
     FROM [dbo].[Rating] AS [Rating]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Recommend" EntityType="Self.Recommend" store:Type="Tables" store:Schema="dbo">
@@ -169,8 +169,7 @@ warning 6013: The table/view 'Window_Project_01.dbo.Voucher_Account' does not ha
     FROM [dbo].[Recommend] AS [Recommend]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Window_ProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -312,7 +311,16 @@ warning 6013: The table/view 'Window_Project_01.dbo.Voucher_Account' does not ha
           <EntitySet Name="Vouchers" EntityType="Self.Voucher" />
           <EntitySet Name="Ratings" EntityType="Self.Rating" />
           <EntitySet Name="Recommends" EntityType="Self.Recommend" />
+          <EntitySet Name="Voucher_Account" EntityType="Window_ProjectModel.Voucher_Account" />
         </EntityContainer>
+        <EntityType Name="Voucher_Account">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="VoucherID" Type="Int32" />
+          <Property Name="BuyerID" Type="Int32" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -437,7 +445,6 @@ warning 6013: The table/view 'Window_Project_01.dbo.Voucher_Account' does not ha
                 <ScalarProperty Name="BuyerID" ColumnName="BuyerID" />
                 <ScalarProperty Name="Comment" ColumnName="Comment" />
                 <ScalarProperty Name="Star" ColumnName="Star" />
-                <ScalarProperty Name="RatingID" ColumnName="RatingID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -447,6 +454,15 @@ warning 6013: The table/view 'Window_Project_01.dbo.Voucher_Account' does not ha
                 <ScalarProperty Name="BuyerID" ColumnName="BuyerID" />
                 <ScalarProperty Name="ViewCount" ColumnName="ViewCount" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Voucher_Account">
+            <EntityTypeMapping TypeName="Window_ProjectModel.Voucher_Account">
+              <MappingFragment StoreEntitySet="Voucher_Account">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BuyerID" ColumnName="BuyerID" />
+                <ScalarProperty Name="VoucherID" ColumnName="VoucherID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

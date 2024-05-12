@@ -12,13 +12,10 @@ namespace EntityProj
     using System;
     using System.Collections.Generic;
     
-    public partial class Rating
+    public partial class Voucher_Account
     {
-        public int SellerID { get; set; }
-        public int ProductID { get; set; }
+        public Nullable<int> VoucherID { get; set; }
         public Nullable<int> BuyerID { get; set; }
-        public string Comment { get; set; }
-        public Nullable<double> Star { get; set; }
-        public int RatingID { get; set; }
+        public int ID { get; set; }
     }
 }

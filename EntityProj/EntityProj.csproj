@@ -408,6 +408,9 @@
       <DependentUpon>ProjectModel.tt</DependentUpon>
     </Compile>
     <Compile Include="VoucherDAO.cs" />
+    <Compile Include="Voucher_Account.cs">
+      <DependentUpon>ProjectModel.tt</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="FAddVoucher.resx">
       <DependentUpon>FAddVoucher.cs</DependentUpon>
     </EmbeddedResource>
