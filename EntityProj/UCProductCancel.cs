@@ -26,11 +26,11 @@ namespace EntityProj.Forms
             InitializeComponent();
         }
 
-        public UCProductCancel(CancelInfo ci)
+        public UCProductCancel(Cancel_Info ci)
         {
             InitializeComponent();
-            pd = productDAO.Retrieve(ci.ProductID);
-            acc = accountDAO.Retrieve(ci.BuyerID);
+            pd = productDAO.Retrieve(ci.ProductID.Value);
+            acc = accountDAO.Retrieve(ci.BuyerID.Value);
             this.ci = ci;
         }
 

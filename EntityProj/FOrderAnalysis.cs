@@ -12,7 +12,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
+//using System.Windows.Forms.DataVisualization.Charting;
 
 namespace EntityProj.Forms
 {
@@ -47,11 +47,11 @@ namespace EntityProj.Forms
         {
             // Load customer
             
-            DataTable dtCustomer = productDAO.LoadRegularCustomer(acc.Id, dtBeginday.Value, dtEndday.Value);
+            DataTable dtCustomer = productDAO.LoadRegularCustomer(acc.ID, dtBeginday.Value, dtEndday.Value);
             gvCustomer.DataSource = dtCustomer;
             gvCustomer.ColumnHeadersHeight = 40;
             //acc = accountDAO.Retrieve(acc.Id);
-            List<Product> allProducts = productDAO.LoadProductWithinPeriod(acc.Id, dtBeginday.Value, dtEndday.Value);
+            List<Product> allProducts = productDAO.LoadProductWithinPeriod(acc.ID, dtBeginday.Value, dtEndday.Value);
             int Displaying = 0;
             int waitForConfirmation = 0;
             int completed = 0;
@@ -80,24 +80,13 @@ namespace EntityProj.Forms
 
             convertByte(pbAvatar, acc.Avatar);
             lblName.Text = acc.Name;
-            lblMoney.Text = acc.Money.ToString("N0") + " VND";
+            lblMoney.Text = acc.Money.Value.ToString("N0") + " VND";
             lblOrdersNo.Text = allProducts.Count.ToString();
             lblCustomersNo.Text = dtCustomer.Rows.Count.ToString();
             lblDisplayingNo.Text = Displaying.ToString();
             lblWaitForConfirmationNo.Text = waitForConfirmation.ToString();
             lblCompletedNo.Text = completed.ToString();
             lblHiddenNo.Text = hidden.ToString();
-
-            /*
-            if (allProducts.Count == 0)
-            {
-                cpProgress.ValueByTransition = 100;
-            }
-            else
-            {
-                cpProgress.ValueByTransition = (int)((float)completed / allProducts.Count);
-            }
-            */
             //Menu
             lblMenuAccountName.Text = acc.Name;
             ratingMenuAccount.Value = acc.AvgRating;
@@ -292,13 +281,13 @@ namespace EntityProj.Forms
                 {
                     MessageBox.Show("Please enter valid integer values for month and year.", "Error");
                 }
-                Chart.SplineMonth(gunaChart1, acc.Id, txtSpecificYear.Text, txtSpecificMonth.Text, days);
+                Chart.SplineMonth(gunaChart1, acc.ID, txtSpecificYear.Text, txtSpecificMonth.Text, days);
             }
             else if(cbDate.SelectedIndex == 5)
             {
                 string YearToFilter = txtSpecificYear.Text.ToString();
                 gunaChart1.Datasets.Clear();
-                Chart.SplineYear(gunaChart1, acc.Id, YearToFilter);
+                Chart.SplineYear(gunaChart1, acc.ID, YearToFilter);
             }
 
 
@@ -347,15 +336,15 @@ namespace EntityProj.Forms
             if (cbDate.SelectedIndex == 1)
             {
                 DateTime yesterday = DateTime.Today.AddDays(-1);
-                Chart.BarHour(gunaChart1, acc.Id, yesterday);
+                Chart.BarHour(gunaChart1, acc.ID, yesterday);
             }
             else if(cbDate.SelectedIndex == 2)
             {
-                Chart.LineDay(gunaChart1, acc.Id, DateTime.Today, 7);
+                Chart.LineDay(gunaChart1, acc.ID, DateTime.Today, 7);
             }
             else if(cbDate.SelectedIndex == 3)
             {
-                Chart.LineDay(gunaChart1, acc.Id, DateTime.Today,30);
+                Chart.LineDay(gunaChart1, acc.ID, DateTime.Today,30);
             }
             else if(cbDate.SelectedIndex == 4)
             {

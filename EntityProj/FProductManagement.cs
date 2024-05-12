@@ -36,10 +36,10 @@ namespace EntityProj.Forms
             List<Product> products = productDAO.LoadList();
             lblSellerName.Text = account.Name;
             //account = accountDAO.Retrieve(account.Id);
-            lblBalance.Text = account.Money.ToString("N0") + " VND";
+            lblBalance.Text = account.Money.Value.ToString("N0") + " VND";
             foreach (var pd in products)
             {
-                if(pd.SellerID == account.Id)
+                if(pd.SellerID == account.ID)
                 {
                     UCProductSell uc = new UCProductSell(pd, account, pd.OrderCondition > (int)ordercondition.Displaying);
                     uc.btnCancel.Visible = false;
@@ -68,8 +68,8 @@ namespace EntityProj.Forms
             ratingMenuAccount.Value = account.AvgRating;
             convertByte(pbMenuAvatar, account.Avatar);
             // Cancel Notification
-            List<CancelInfo> list = cancelInfoDAO.loadList(account.Id);
-            foreach (CancelInfo ci in list)
+            List<Cancel_Info> list = cancelInfoDAO.LoadList(account.ID);
+            foreach (Cancel_Info ci in list)
             {
                 UCProductCancel uc = new UCProductCancel(ci);
                 flpCancelledProducts.Controls.Add(uc);

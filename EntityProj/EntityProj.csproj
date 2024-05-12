@@ -178,6 +178,7 @@
       <DependentUpon>ProjectModel.tt</DependentUpon>
     </Compile>
     <Compile Include="CartDAO.cs" />
+    <Compile Include="Chart.cs" />
     <Compile Include="FAddVoucher.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -340,6 +341,7 @@
       <DependentUpon>ProjectModel.tt</DependentUpon>
     </Compile>
     <Compile Include="RecommendDAO.cs" />
+    <Compile Include="RegularCustomer.cs" />
     <Compile Include="ShippingDAO.cs" />
     <Compile Include="ShippingInfo.cs">
       <DependentUpon>ProjectModel.tt</DependentUpon>

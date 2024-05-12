@@ -63,14 +63,14 @@ namespace EntityProj
             {
                 // Use LINQ to query products similar to the specified type and exclude the specified productId
                 var similarProducts = context.Products
-                    .Where(p => p.Type == type && p.Id != productId)
+                    .Where(p => p.Type == type && p.ID != productId)
                     .ToList();
 
                 // Convert the list of Product entities to a list of Product objects
                 List<Product> productList = similarProducts
                     .Select(p => new Product
                     {
-                        Id = p.Id,
+                        ID = p.ID,
                         Name = p.Name,
                         Type = p.Type,
                         // Assign other properties as needed
@@ -85,7 +85,7 @@ namespace EntityProj
         {
             using (var context = new Window_ProjectContext())
             {
-                var productEntity = context.Products.Find(product.Id);
+                var productEntity = context.Products.Find(product.ID);
                 if (productEntity != null)
                 {
                     productEntity.BuyerID = 0;
@@ -93,7 +93,7 @@ namespace EntityProj
                 }
                 else
                 {
-                    throw new ArgumentException($"Product with ID {product.Id} not found.");
+                    throw new ArgumentException($"Product with ID {product.ID} not found.");
                 }
             }
         }
@@ -113,40 +113,85 @@ namespace EntityProj
             }
         }
 
-        public DataTable LoadRegularCustomer(int sellerId, DateTime start, DateTime end)
+        public DataTable LoadRegularCustomer(int id, DateTime start, DateTime end)
+        {
+            List<Product> list = LoadListCompletedProduct(id, start, end);
+            List<RegularCustomer> rs = new List<RegularCustomer>();
+            foreach (Product pd in list)
+            {
+                bool find = false;
+                int index = -1;
+                foreach (RegularCustomer rc in rs)
+                {
+                    index++;
+                    if (rc.Id == pd.BuyerID)
+                    {
+                        find = true;
+                        break;
+                    }
+                }
+                if (find)
+                {
+                    rs[index].Times++;
+                    rs[index].Totalpurchase += (double)pd.SalePrice;
+                }
+                else
+                {
+                    rs.Add(new RegularCustomer(pd.BuyerID.Value, pd));
+                }
+            }
+            // Create DataTable
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Name", typeof(string));
+            dt.Columns.Add("Number of product purchases", typeof(int));
+            dt.Columns.Add("Total Purchases", typeof(string));
+
+            foreach (RegularCustomer customer in rs)
+            {
+                dt.Rows.Add(customer.Name, customer.Times, string.Format(customer.Totalpurchase.ToString("N0") + " VND"));
+            }
+
+            return dt;
+        }
+
+        public List<Product> LoadListCompletedProduct(int sellerId, DateTime start, DateTime end)
         {
             using (var context = new Window_ProjectContext())
             {
-                // Query completed orders within the specified date range
-                var completedOrders = context.Orders
-                    .Where(o => o.SellerID == sellerId && o.OrderDate >= start && o.OrderDate <= end && o.Status == "Completed")
+                var productList = context.Products
+                .Where(p => p.SellerID == sellerId &&
+                            p.OrderCondition == 2 &&
+                            p.CompleteTime >= start &&
+                            p.CompleteTime <= end)
+                .ToList();
+
+            return productList;
+            }
+        }
+
+        public List<Product> LoadProductWithinPeriod(int sellerId, DateTime start, DateTime end)
+        {
+            using (var context = new Window_ProjectContext())
+            {
+                // Query products within the specified date range
+                var productList = context.Products
+                    .Where(p => p.SellerID == sellerId &&
+                                p.CompleteTime >= start &&
+                                p.CompleteTime <= end)
                     .ToList();
 
-                // Aggregate regular customer data
-                var regularCustomers = completedOrders
-                    .GroupBy(o => o.BuyerID)
-                    .Select(g => new RegularCustomer
-                    {
-                        BuyerID = g.Key,
-                        Name = g.First().Buyer.Name, // Assuming Buyer is a navigation property in Order referencing the Account table
-                        Times = g.Count(),
-                        TotalPurchase = g.Sum(o => o.TotalPrice)
-                    })
-                    .ToList();
+                return productList;
+            }
+        }
 
-                // Create DataTable to hold the aggregated data
-                DataTable dt = new DataTable();
-                dt.Columns.Add("Name", typeof(string));
-                dt.Columns.Add("Number of Product Purchases", typeof(int));
-                dt.Columns.Add("Total Purchases", typeof(string));
+        public Product Retrieve(int id)
+        {
+            using (var context = new Window_ProjectContext())
+            {
+                // Retrieve a single Product entity by its ID using Entity Framework
+                var product = context.Products.FirstOrDefault(p => p.ID == id);
 
-                // Populate DataTable with aggregated data
-                foreach (var customer in regularCustomers)
-                {
-                    dt.Rows.Add(customer.Name, customer.Times, $"{customer.TotalPurchase:N0} VND");
-                }
-
-                return dt;
+                return product; // Returns the Product entity or null if not found
             }
         }
     }

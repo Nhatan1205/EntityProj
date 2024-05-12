@@ -1,6 +1,8 @@
-﻿using System;
+﻿using EntityProj.Forms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -32,6 +34,23 @@ namespace EntityProj
             catch (Exception ex)
             {
                 MessageBox.Show($"Error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public List<Cancel_Info> LoadList(int sellerId)
+        {
+            using (var context = new Window_ProjectContext())
+            {
+                var cancelInfos = context.Cancel_Info
+                     .Join(context.Products,
+                           cancel => cancel.ProductID,
+                           product => product.ID,
+                           (cancel, product) => new { Cancel = cancel, Product = product })
+                     .Where(joined => joined.Product.SellerID == sellerId)
+                     .Select(joined => joined.Cancel)
+                     .ToList();
+
+                return cancelInfos;
             }
         }
 
