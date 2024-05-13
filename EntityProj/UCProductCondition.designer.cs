@@ -33,8 +33,8 @@
             this.lblPrice = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
             this.btnNextState = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.pbImage = new Guna.UI2.WinForms.Guna2PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             this.SuspendLayout();
             // 
             // lblProductName
@@ -110,23 +110,23 @@
             this.btnNextState.MouseEnter += new System.EventHandler(this.btnNextState_MouseEnter);
             this.btnNextState.MouseLeave += new System.EventHandler(this.btnNextState_MouseLeave);
             // 
-            // pictureBox1
+            // pbImage
             // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(128, 114);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 16;
-            this.pictureBox1.TabStop = false;
+            this.pbImage.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pbImage.ImageRotate = 0F;
+            this.pbImage.Location = new System.Drawing.Point(0, 0);
+            this.pbImage.Name = "pbImage";
+            this.pbImage.Size = new System.Drawing.Size(128, 114);
+            this.pbImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbImage.TabIndex = 16;
+            this.pbImage.TabStop = false;
             // 
             // UCProductCondition
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pbImage);
             this.Controls.Add(this.btnNextState);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.lblPrice);
@@ -135,7 +135,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "UCProductCondition";
             this.Size = new System.Drawing.Size(1230, 114);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -148,6 +148,6 @@
         public System.Windows.Forms.Label lblPrice;
         public System.Windows.Forms.Label lblStatus;
         public System.Windows.Forms.Button btnNextState;
-        public System.Windows.Forms.PictureBox pictureBox1;
+        public Guna.UI2.WinForms.Guna2PictureBox pbImage;
     }
 }

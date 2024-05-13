@@ -42,7 +42,7 @@ namespace EntityProj.Forms
         {
             foreach (Rating rating in ratingList)
             {
-                UCReview uc = new UCReview(product, account, rating);
+                UCReview uc = new UCReview(account, rating);
                 flpRating.Controls.Add(uc);
             }
             lblNameSeller.Text = Seller.Name;
@@ -218,7 +218,7 @@ namespace EntityProj.Forms
             flpRating.Controls.Clear();
             foreach (Rating rating in ratingList)
             {
-                UCReview uc = new UCReview(product, account, rating);
+                UCReview uc = new UCReview(account, rating);
                 flpRating.Controls.Add(uc);
             }
         }

@@ -26,10 +26,9 @@ namespace EntityProj.Forms
         {
             InitializeComponent();
         }
-        public UCReview(Product pd, Account acc, Rating rt)
+        public UCReview(Account acc, Rating rt)
         {
             InitializeComponent();
-            this.product = pd;
             this.account = acc;
             this.rating = rt;
         }
@@ -72,12 +71,12 @@ namespace EntityProj.Forms
             rsStar.Value = (float)rating.Star;
             rsStar.ReadOnly = true;
             // edit UCProductCondition with minimalism
-            ucProductConditionReduce2.lblStatus.Visible = false;
-            ucProductConditionReduce2.lblPrice.Visible = false;
-            ucProductConditionReduce2.btnNextState.Visible = false;
-            convertByte(ucProductConditionReduce.pictureBox1, imageDAO.GetImageProductData(rating.ProductID));
-            ucProductConditionReduce2.lblBuyerName.Text = product.SalePrice.ToString();
-            ucProductConditionReduce2.lblProductName.Text = product.Name;
+            ucProductCondition1.lblStatus.Visible = false;
+            ucProductCondition1.lblPrice.Visible = false;
+            ucProductCondition1.btnNextState.Visible = false;
+            convertByte(ucProductCondition1.pbImage, imageDAO.GetImageProductData(rating.ProductID));
+            ucProductCondition1.lblBuyerName.Text = productDAO.Retrieve(rating.ProductID).SalePrice.ToString();
+            ucProductCondition1.lblProductName.Text = productDAO.Retrieve(rating.ProductID).Name;
         }
         private void GenerateLabel(Panel panel, string labelText, int labelCount)
         {

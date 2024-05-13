@@ -205,40 +205,45 @@ namespace EntityProj.Forms
 
         private void btnFilter_Click(object sender, EventArgs e)
         {
+            // Load all products from the DAO
             List<Product> products = productDAO.LoadList();
-            List<Product> productWithoutBuyerAndDisplaying = new List<Product>();
-            //get product without buyid and having condition displaying
-            foreach (var pd in products)
+
+            // Filter products based on conditions: no buyer and displaying
+            List<Product> productWithoutBuyerAndDisplaying = products.Where(pd =>
+                (pd.BuyerID == null || pd.BuyerID <= 0) &&
+                pd.OrderCondition == (int)ordercondition.Displaying
+            ).ToList();
+
+            // Retrieve filter criteria from UI inputs
+            string productName = txtProductName.Text.Trim().ToLower();
+            string brand = txtBrand.Text.Trim().ToLower();
+            decimal maxPrice = decimal.MaxValue; // Default maximum price
+            decimal minPrice = decimal.MinValue; // Default minimum price
+
+            // Parse and validate maximum price input
+            if (!string.IsNullOrEmpty(txtMaxPrice.Text) && decimal.TryParse(txtMaxPrice.Text, out maxPrice))
             {
-                if ((pd.BuyerID == null || pd.BuyerID <= 0) && pd.OrderCondition == (int)ordercondition.Displaying)
-                {
-                    productWithoutBuyerAndDisplaying.Add(pd);
-                }
+                maxPrice = Math.Max(maxPrice, decimal.MinValue); // Ensure within valid range
             }
-            string productName = txtProductName.Text;
-            string brand = txtBrand.Text;
-            double maxPrice = double.TryParse(txtMaxPrice.Text, out double parsedMaxPrice) ? parsedMaxPrice : double.MaxValue;
-            double minPrice = double.TryParse(txtMinPrice.Text, out double parsedMinPrice) ? parsedMinPrice : double.MinValue;
+
+            // Parse and validate minimum price input
+            if (!string.IsNullOrEmpty(txtMinPrice.Text) && decimal.TryParse(txtMinPrice.Text, out minPrice))
+            {
+                minPrice = Math.Min(minPrice, decimal.MaxValue); // Ensure within valid range
+            }
+
             string selectedCategory = ddCategories.SelectedItem?.ToString();
 
             // Filter products based on the specified conditions
             List<Product> filteredProducts = productWithoutBuyerAndDisplaying.Where(pd =>
-                (string.IsNullOrEmpty(productName) || pd.Name.ToLower().Contains(productName.ToLower())) &&
-                (string.IsNullOrEmpty(brand) || pd.Brand.ToLower().Contains(brand.ToLower())) &&
-                (pd.SalePrice >= (decimal)minPrice && pd.SalePrice <= (decimal)maxPrice) &&
+                (string.IsNullOrEmpty(productName) || pd.Name.ToLower().Contains(productName)) &&
+                (string.IsNullOrEmpty(brand) || pd.Brand.ToLower().Contains(brand)) &&
+                (pd.SalePrice >= minPrice && pd.SalePrice <= maxPrice) &&
                 (string.IsNullOrEmpty(selectedCategory) || pd.Category == selectedCategory)
             ).ToList();
 
             // Clear existing products in the flow layout panel
-            for (int i = flpProduct.Controls.Count - 1; i >= 0; i--)
-            {
-                Control control = flpProduct.Controls[i];
-                if (control is UCProduct)
-                {
-                    flpRecommendProducts.Controls.Remove(control);
-                    control.Dispose();
-                }
-            }
+            flpProduct.Controls.Clear();
 
             // Add filtered products to the flow layout panel
             foreach (var pd in filteredProducts)
@@ -247,7 +252,8 @@ namespace EntityProj.Forms
                 uc.ProductDoubleClick += UCProduct_ProductDoubleClick;
                 flpProduct.Controls.Add(uc);
             }
-            //
+
+            // Hide recommendation panels and update label text
             flpRecommendProducts.Visible = false;
             panelRecommendProducts.Visible = false;
             panelRecommend.Visible = false;

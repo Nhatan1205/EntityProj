@@ -142,9 +142,15 @@ namespace EntityProj.Forms
             account.Money -= (float)product.SalePrice;
             accountDAO.Update(account);
             //get seller
+
+
             Account Buyer = accountDAO.Retrieve(product.BuyerID.Value);
-            Buyer.Money += (float)product.SalePrice;
-            accountDAO.Update(Buyer);
+            if (Buyer != null && product.PayMethod==true)
+            {
+                Buyer.Money += (float)product.SalePrice;
+                accountDAO.Update(Buyer);
+            }
+
             if (result == DialogResult.Yes)
             {
                 productDAO.Delete(product);

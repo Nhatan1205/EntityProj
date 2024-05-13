@@ -53,11 +53,6 @@ namespace EntityProj
                     {
                         dbContext.Carts.Remove(cartItem);
                         dbContext.SaveChanges();
-                        MessageBox.Show("Product removed from cart successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Product not found in cart.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }

@@ -114,9 +114,9 @@ namespace EntityProj.Forms
             cbCategory.SelectedItem = pd.Category;
             cbArea.SelectedItem = pd.Area;
             //shipping info
-            ShippingInfo shipping = shippingDAO.GetShipping(pd.selectedShippingID.Value);
-            if(shipping!=null)
+            if (pd.selectedShippingID.HasValue)
             {
+                ShippingInfo shipping = shippingDAO.GetShipping(pd.selectedShippingID.Value);
                 lblBuyerName.Text = shipping.RecipientName;
                 lblPhone.Text = shipping.PhoneNumber;
                 txtAddress.Text = shipping.Address;
@@ -490,7 +490,7 @@ namespace EntityProj.Forms
                 if (pictureBoxIndex >= 4) // If we have more images than PictureBoxes
                     break;
 
-                byte[] imageData = (byte[])row["Image"]; // Access the "Image" column
+                byte[] imageData = (byte[])row["ImageURL"]; // Access the "Image" column
 
                 // Load image into PictureBox
                 MemoryStream ms = new MemoryStream(imageData);
